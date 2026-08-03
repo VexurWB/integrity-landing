@@ -341,6 +341,7 @@ p{margin:0}
 }
 .sound-btn:hover{background:rgba(21,181,191,.12);border-color:var(--turquoise)}
 .sound-btn.on{background:var(--turquoise);border-color:var(--turquoise);color:#fff}
+.video-meta-actions{display:flex;align-items:center;gap:.55rem;flex-wrap:wrap}
 
 .hero-cta{display:flex;flex-wrap:wrap;gap:.85rem;justify-content:center;margin-top:clamp(2.4rem,3.6vw,3.4rem)}
 .hero-note{
@@ -751,7 +752,10 @@ details p{padding:0 2.6rem 1.5rem 0;color:var(--ink-soft);font-size:.98rem}
       </div>
       <div class="video-meta">
         <span class="video-meta-label">Suz Hutchings · Integrity Buyers Agent Perth</span>
-        <button class="sound-btn" id="soundBtn" type="button">Tap for sound</button>
+        <div class="video-meta-actions">
+          <button class="sound-btn" id="playToggleBtn" type="button" aria-label="Play the video">Play</button>
+          <button class="sound-btn" id="soundBtn" type="button">Tap for sound</button>
+        </div>
       </div>
     </div>
 
@@ -1185,27 +1189,76 @@ details p{padding:0 2.6rem 1.5rem 0;color:var(--ink-soft);font-size:.98rem}
   var overlay = document.getElementById('videoOverlay');
   var soundBtn = document.getElementById('soundBtn');
   var playBtn = document.getElementById('playBtn');
+  var playToggleBtn = document.getElementById('playToggleBtn');
 
   function syncSoundBtn(){
     soundBtn.classList.toggle('on', !video.muted);
     soundBtn.textContent = video.muted ? 'Tap for sound' : 'Sound on';
   }
 
-  function startVideo(unmute){
-    video.muted = !unmute;
+  function syncPlayToggle(){
+    var playing = !video.paused && !video.ended;
+    playToggleBtn.classList.toggle('on', playing);
+    playToggleBtn.textContent = playing ? 'Pause' : 'Play';
+    playToggleBtn.setAttribute('aria-label', playing ? 'Pause the video' : 'Play the video');
+  }
+
+  function showOverlay(){
+    overlay.classList.remove('hidden');
+    overlay.setAttribute('aria-hidden', 'false');
+  }
+
+  function hideOverlay(){
     overlay.classList.add('hidden');
     overlay.setAttribute('aria-hidden', 'true');
+  }
+
+  function playVideo(unmute){
+    if(typeof unmute === 'boolean'){ video.muted = !unmute; }
+    hideOverlay();
     syncSoundBtn();
+    syncPlayToggle();
     video.play().catch(function(){});
   }
 
-  playBtn.addEventListener('click', function(){ startVideo(true); });
-  overlay.addEventListener('click', function(){ startVideo(true); });
+  function pauseVideo(){
+    video.pause();
+    showOverlay();
+    syncPlayToggle();
+  }
+
+  playBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    if(video.ended){ video.currentTime = 0; }
+    playVideo(true);
+  });
+  overlay.addEventListener('click', function(e){
+    if(e.target === overlay){
+      if(video.ended){ video.currentTime = 0; }
+      playVideo(true);
+    }
+  });
+  playToggleBtn.addEventListener('click', function(){
+    if(video.paused || video.ended){
+      var restart = video.ended;
+      if(restart){ video.currentTime = 0; }
+      playVideo(restart ? true : undefined);
+      return;
+    }
+    pauseVideo();
+  });
   soundBtn.addEventListener('click', function(){
-    if(video.paused){ startVideo(true); return; }
+    if(video.paused){ playVideo(true); return; }
     video.muted = !video.muted;
     syncSoundBtn();
   });
+  video.addEventListener('play', syncPlayToggle);
+  video.addEventListener('pause', syncPlayToggle);
+  video.addEventListener('ended', function(){
+    showOverlay();
+    syncPlayToggle();
+  });
+  syncPlayToggle();
 
   /* Vexur calendar mount */
   var attempts = 0;

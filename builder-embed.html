@@ -1,0 +1,1323 @@
+<!--
+  ============================================================
+  Integrity Buyers Agent Perth — landing page
+  WEBSITE-BUILDER EMBED (self-contained fragment)
+  ============================================================
+
+  GENERATED FILE — do not edit by hand.
+  Edit index.html, then regenerate:  node build-embed.mjs
+
+  HOW TO USE
+  1. Open your builder's custom HTML / embed / code block.
+  2. Paste this entire file in — every line, style and script blocks included.
+  3. Publish.
+
+  WHAT MAKES IT SAFE TO PASTE
+  - All CSS is scoped under .ibap, so it cannot restyle your site.
+  - A zero-specificity reset absorbs your theme's styles bleeding in.
+  - All ids are prefixed "ibap-", so #top / #book cannot collide.
+  - The portrait loads from an absolute URL — no image upload needed.
+
+  IF SOMETHING LOOKS OFF
+  - Fonts not loading? Your builder stripped the @import. Add this to the
+    builder's own head/custom-code area instead:
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@400;500;600;700&display=swap">
+  - Booking calendar blank? The builder must allow scripts to run, and the
+    Vexur widget must permit your domain. It is blocked on localhost by
+    design, so always test on the published URL.
+  - Two headers? Delete the block marked "OPTIONAL HEADER" below.
+-->
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@400;500;600;700&display=swap');
+
+/* ============================================================
+   HOST RESET — absorbs the builder theme's own styles.
+   :where() keeps this at zero specificity so the real rules
+   below always win. The booking widget subtree is excluded.
+   ============================================================ */
+/* Inherited text properties: a theme setting these on the page body
+   reaches in here, and specificity cannot block inheritance. */
+.ibap{
+  letter-spacing:normal;word-spacing:normal;text-transform:none;
+  text-align:left;font-style:normal;font-variant:normal;
+}
+.ibap :where(h1,h2,h3,h4,h5,h6,p,ul,ol,li,dl,dd,blockquote,figure,cite,fieldset):not(:where([class*="vexur"] *)){
+  margin:0;padding:0;border:0;font-style:normal;
+  /* Themes colour headings directly, which beats inheritance. */
+  color:inherit;
+}
+.ibap :where(ul,ol):not(:where([class*="vexur"] *)){list-style:none}
+.ibap :where(a):not(:where([class*="vexur"] *)){text-decoration:none;color:inherit}
+.ibap :where(img,video):not(:where([class*="vexur"] *)){
+  max-width:100%;height:auto;display:block;border:0;
+}
+.ibap :where(button,summary):not(:where([class*="vexur"] *)){
+  font:inherit;color:inherit;background:none;border:0;
+}
+.ibap :where(section,article,aside,header,footer,div):not(:where([class*="vexur"] *)){
+  background:none;
+}
+.ibap :where(table):not(:where([class*="vexur"] *)){border-collapse:collapse}
+
+/* ============================================================
+   LANDING PAGE STYLES — scoped to .ibap
+   ============================================================ */
+
+/* ============================================================
+   INTEGRITY BRAND TOKENS — matches app/globals.css + tailwind
+   ============================================================ */
+.ibap{
+  --navy:       #0A2533;
+  --navy-mid:   #0C2E3A;
+  --navy-deep:  #071820;
+  --navy-accent:#143C4B;
+  --turquoise:  #15B5BF;
+  --turquoise-light:#1ECAD4;
+  --turquoise-deep:#0B7A82;
+  --ice:        #FAFBFC;
+  --ice-mid:    #E7F7F8;
+  --ice-deep:   #DDF0F2;
+  --ink:        #0C2E3A;
+  --ink-soft:   rgba(12,46,58,.68);
+  --ink-faint:  rgba(12,46,58,.42);
+  --on-navy:    rgba(255,255,255,.78);
+  --line-dark:  rgba(255,255,255,.14);
+  --line-light: rgba(12,46,58,.14);
+  --stamp:      #D24343;
+
+  --display:'Cormorant Garamond', Georgia, serif;
+  --body:'Inter', system-ui, sans-serif;
+
+  --wrap: 1180px;
+  --measure: 62ch;
+  --r: 8px;
+  --pad-y: clamp(76px, 9vw, 136px);
+  --gap-head: clamp(40px, 5vw, 64px);
+  --header-h: 68px;
+}
+.ibap *:not(:where([class*="vexur"] *)),
+.ibap *:not(:where([class*="vexur"] *))::before,
+.ibap *:not(:where([class*="vexur"] *))::after{box-sizing:border-box}
+.ibap{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+.ibap [id]{scroll-margin-top:calc(var(--header-h) + 24px)}
+.ibap{
+  margin:0;
+  background:var(--ice);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:17px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+.ibap img{max-width:100%;display:block;height:auto}
+.ibap a{color:inherit}
+.ibap ::selection{background:rgba(21,181,191,.28);color:var(--ink)}
+.ibap :focus-visible{
+  outline:3px solid var(--turquoise);
+  outline-offset:3px;
+  border-radius:2px;
+}
+/* ============================================================
+   SURFACES — ported from .surface-navy / .surface-blend
+   ============================================================ */
+.ibap .ibap-surface-navy{
+  background:
+    radial-gradient(ellipse 65% 55% at 8% 100%, rgba(21,181,191,.22), transparent 55%),
+    radial-gradient(ellipse 70% 50% at 100% 0%, rgba(20,60,75,.45), transparent 48%),
+    linear-gradient(165deg, var(--navy) 0%, var(--navy-mid) 48%, var(--navy-deep) 100%);
+  color:#fff;
+}
+.ibap .ibap-surface-blend{
+  background:
+    radial-gradient(ellipse 85% 55% at 50% -10%, rgba(21,181,191,.12), transparent 58%),
+    radial-gradient(ellipse 60% 40% at 100% 100%, rgba(11,122,130,.06), transparent 50%),
+    linear-gradient(180deg, var(--ice) 0%, var(--ice-mid) 55%, var(--ice-deep) 100%);
+}
+.ibap .ibap-surface-ice{background:var(--ice)}
+.ibap .ibap-grain{position:relative;isolation:isolate}
+.ibap .ibap-grain::after{
+  content:'';position:absolute;inset:0;pointer-events:none;z-index:0;
+  opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat:repeat;background-size:200px 200px;
+}
+.ibap .ibap-grain > *{position:relative;z-index:1}
+.ibap .ibap-grid-overlay::before{
+  content:'';position:absolute;inset:0;pointer-events:none;z-index:0;
+  opacity:.04;
+  background-image:
+    linear-gradient(90deg, rgba(255,255,255,.35) 1px, transparent 1px),
+    linear-gradient(rgba(255,255,255,.28) 1px, transparent 1px);
+  background-size:120px 120px;
+}
+/* ============================================================
+   TYPE
+   ============================================================ */
+.ibap h1,
+.ibap h2,
+.ibap h3,
+.ibap h4{
+  font-family:var(--display);
+  font-weight:300;
+  line-height:1.02;
+  letter-spacing:-.015em;
+  margin:0;
+  text-wrap:balance;
+}
+.ibap h1{font-size:clamp(2.5rem, 5.8vw, 4.5rem);line-height:.94}
+.ibap h2{font-size:clamp(2rem, 4.2vw, 3.25rem);line-height:.98}
+.ibap h3{font-size:clamp(1.2rem, 1.8vw, 1.5rem);letter-spacing:-.01em}
+.ibap p{margin:0}
+.ibap .ibap-kicker{
+  font-family:var(--body);
+  font-size:.68rem;
+  letter-spacing:.26em;
+  text-transform:uppercase;
+  font-weight:600;
+}
+.ibap .ibap-lede{font-size:clamp(1.02rem,1.35vw,1.12rem);line-height:1.72;text-wrap:pretty}
+.ibap .ibap-accent{color:var(--turquoise);font-style:italic}
+/* ============================================================
+   LAYOUT
+   ============================================================ */
+.ibap .ibap-wrap{width:min(100% - 44px, var(--wrap));margin-inline:auto}
+.ibap .ibap-section{padding-block:var(--pad-y);position:relative}
+.ibap .ibap-skip{
+  position:absolute;left:-9999px;top:0;z-index:100;
+  background:var(--turquoise);color:#fff;padding:.75rem 1.1rem;
+  font-size:.8rem;font-weight:600;text-decoration:none;border-radius:0 0 var(--r) 0;
+}
+.ibap .ibap-skip:focus{left:0}
+/* ============================================================
+   SECTION HEADS — editorial index + rule + measure
+   ============================================================ */
+.ibap .ibap-section-head{
+  display:grid;grid-template-columns:auto 1fr;
+  gap:0 clamp(20px,3vw,44px);
+  padding-top:1.4rem;border-top:1px solid var(--line-light);
+}
+.ibap .ibap-bg-dark .ibap-section-head{border-top-color:var(--line-dark)}
+.ibap .ibap-section-index{
+  font-family:var(--display);font-size:1.1rem;font-weight:400;
+  color:var(--turquoise-deep);line-height:1;padding-top:.35rem;
+  font-variant-numeric:tabular-nums;
+}
+.ibap .ibap-bg-dark .ibap-section-index{color:var(--turquoise)}
+.ibap .ibap-section-head-body{max-width:var(--measure)}
+.ibap .ibap-section-head .ibap-kicker{display:block;margin-bottom:.85rem;color:var(--turquoise-deep)}
+.ibap .ibap-bg-dark .ibap-section-head .ibap-kicker{color:var(--turquoise)}
+.ibap .ibap-section-head p{color:var(--ink-soft);margin-top:1.15rem}
+.ibap .ibap-bg-dark .ibap-section-head p{color:var(--on-navy)}
+.ibap .ibap-section-head--center{
+  grid-template-columns:1fr;text-align:center;justify-items:center;
+  max-width:720px;margin-inline:auto;
+}
+.ibap .ibap-section-head--center .ibap-section-head-body{max-width:56ch}
+.ibap .ibap-section-body{margin-top:var(--gap-head)}
+/* ============================================================
+   BUTTONS — .cta-gradient from globals.css
+   ============================================================ */
+.ibap .ibap-btn{
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-family:var(--body);font-weight:600;
+  font-size:.9375rem;letter-spacing:.01em;
+  padding:1rem 1.55rem;border-radius:var(--r);
+  border:1.5px solid transparent;text-decoration:none;cursor:pointer;
+  transition:transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease;
+}
+.ibap .ibap-btn-primary{
+  color:#fff;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.14), rgba(0,0,0,.04)),
+    linear-gradient(135deg, var(--turquoise-light) 0%, var(--turquoise) 52%, var(--turquoise-deep) 100%);
+  box-shadow:0 10px 28px -12px rgba(21,181,191,.55), inset 0 1px 0 rgba(255,255,255,.4);
+}
+.ibap .ibap-btn-primary:hover{
+  transform:translateY(-2px);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.18), rgba(0,0,0,.03)),
+    linear-gradient(135deg, #28D4DE 0%, #17BFC9 52%, #0C858E 100%);
+  box-shadow:0 16px 36px -12px rgba(21,181,191,.72), inset 0 1px 0 rgba(255,255,255,.4);
+}
+.ibap .ibap-btn-ghost{border-color:var(--line-dark);color:#fff;background:transparent}
+.ibap .ibap-btn-ghost:hover{border-color:rgba(255,255,255,.45);background:rgba(255,255,255,.06);transform:translateY(-2px)}
+.ibap .ibap-btn-navy{
+  background:linear-gradient(180deg, var(--navy-accent) 0%, var(--navy) 100%);
+  color:#fff;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
+}
+.ibap .ibap-btn-navy:hover{
+  background:linear-gradient(180deg, #1A4A5C 0%, #0C2E3A 100%);
+  transform:translateY(-2px);
+}
+.ibap .ibap-btn .ibap-arw{opacity:.8;font-weight:400}
+.ibap .ibap-btn-sm{padding:.72rem 1.15rem;font-size:.875rem}
+/* ============================================================
+   CREDENTIAL BAR
+   ============================================================ */
+.ibap .ibap-cred-bar{
+  background:var(--navy-deep);
+  color:rgba(255,255,255,.62);
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+.ibap .ibap-cred-bar-in{
+  display:flex;align-items:center;justify-content:center;
+  gap:clamp(.9rem,2.4vw,2rem);flex-wrap:wrap;
+  padding-block:.6rem;
+  font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;font-weight:500;
+  text-align:center;
+}
+.ibap .ibap-cred-bar-in span{display:inline-flex;align-items:center;gap:.55rem}
+.ibap .ibap-cred-bar-in span::before{
+  content:'';width:4px;height:4px;border-radius:50%;
+  background:var(--turquoise);flex:none;
+}
+/* ============================================================
+   HEADER
+   ============================================================ */
+.ibap .ibap-site-header{
+  position:sticky;top:0;z-index:60;
+  /* Always dark — header sits above <main>, not over the hero, so transparent
+     would show the light body bg and hide white nav text. */
+  background:rgba(10,37,51,.94);
+  backdrop-filter:blur(12px) saturate(1.2);
+  border-bottom:1px solid var(--line-dark);
+  transition:background .3s ease;
+}
+.ibap .ibap-site-header.ibap-stuck{
+  background:rgba(10,37,51,.98);
+}
+.ibap .ibap-header-in{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-block:.95rem}
+.ibap .ibap-brand{display:flex;flex-direction:column;text-decoration:none;color:#fff;line-height:1.12}
+.ibap .ibap-brand-name{
+  font-family:var(--display);font-weight:300;font-size:1.35rem;
+  letter-spacing:-.02em;
+}
+.ibap .ibap-brand-sub{
+  margin-top:.35rem;font-size:.55rem;font-weight:600;
+  letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.62);
+}
+.ibap .ibap-header-actions{display:flex;align-items:center;gap:1.25rem}
+.ibap .ibap-header-phone{
+  font-size:.875rem;font-weight:500;color:#fff;text-decoration:none;
+  display:flex;align-items:center;gap:.5rem;white-space:nowrap;
+}
+.ibap .ibap-header-phone .ibap-dot{width:6px;height:6px;border-radius:50%;background:var(--turquoise);flex:none}
+.ibap .ibap-header-phone:hover{color:var(--turquoise)}
+.ibap .ibap-site-nav{display:flex;align-items:center;gap:clamp(1rem,2.2vw,1.9rem)}
+.ibap .ibap-site-nav a{
+  font-size:.8rem;font-weight:500;letter-spacing:.01em;
+  color:rgba(255,255,255,.72);text-decoration:none;
+  padding-block:.3rem;position:relative;white-space:nowrap;
+  transition:color .2s ease;
+}
+.ibap .ibap-site-nav a::after{
+  content:'';position:absolute;left:0;right:100%;bottom:0;height:1px;
+  background:var(--turquoise);transition:right .25s ease;
+}
+.ibap .ibap-site-nav a:hover{color:#fff}
+.ibap .ibap-site-nav a:hover::after{right:0}
+/* ============================================================
+   HERO
+   ============================================================ */
+.ibap .ibap-hero{
+  padding-block:clamp(30px,4vw,52px) clamp(64px,7vw,96px);
+  position:relative;overflow:hidden;
+}
+.ibap .ibap-hero-head{max-width:850px;margin-inline:auto;text-align:center}
+.ibap .ibap-hero .ibap-kicker{color:rgba(255,255,255,.75);margin-bottom:1.5rem;display:block}
+.ibap .ibap-hero-lede{color:var(--on-navy);margin-top:1.5rem;max-width:640px;margin-inline:auto}
+.ibap .ibap-video-shell{max-width:900px;margin:clamp(34px,4.5vw,54px) auto 0;position:relative}
+.ibap .ibap-video-frame{
+  position:relative;aspect-ratio:16/9;border-radius:var(--r);overflow:hidden;
+  background:var(--navy-deep);
+  border:1px solid rgba(21,181,191,.25);
+  box-shadow:0 40px 90px -40px rgba(0,0,0,.75), 0 0 0 1px rgba(255,255,255,.04) inset;
+}
+.ibap .ibap-video-frame video{width:100%;height:100%;object-fit:cover;display:block;background:#000}
+.ibap .ibap-video-overlay{
+  position:absolute;inset:0;display:grid;place-items:center;
+  background:rgba(7,24,32,.35);cursor:pointer;transition:opacity .25s ease;
+}
+.ibap .ibap-video-overlay.ibap-hidden{opacity:0;pointer-events:none}
+.ibap .ibap-play{
+  width:76px;height:76px;border-radius:50%;border:none;cursor:pointer;
+  background:var(--turquoise);color:#fff;
+  display:grid;place-items:center;
+  box-shadow:0 0 0 0 rgba(21,181,191,.45);
+  animation:pulse 2.8s ease-out infinite;
+  transition:transform .2s ease;
+}
+.ibap .ibap-play:hover{transform:scale(1.05)}
+.ibap .ibap-play svg{margin-left:4px}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(21,181,191,.45)}
+  70%{box-shadow:0 0 0 26px rgba(21,181,191,0)}
+  100%{box-shadow:0 0 0 0 rgba(21,181,191,0)}
+}
+/* video meta bar — replaces the floating pill */
+.ibap .ibap-video-meta{
+  margin-top:.85rem;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:1rem;flex-wrap:wrap;
+}
+.ibap .ibap-video-meta-label{
+  font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;font-weight:500;
+  color:rgba(255,255,255,.48);
+  display:inline-flex;align-items:center;gap:.6rem;
+}
+.ibap .ibap-video-meta-label::before{
+  content:'';width:18px;height:1px;background:rgba(21,181,191,.6);flex:none;
+}
+.ibap .ibap-sound-btn{
+  display:inline-flex;align-items:center;gap:.55rem;
+  background:transparent;color:var(--turquoise);
+  border:1px solid rgba(21,181,191,.4);
+  font-family:var(--body);
+  font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;
+  padding:.5rem .95rem;border-radius:100px;cursor:pointer;
+  transition:background .2s ease, border-color .2s ease, color .2s ease;
+}
+.ibap .ibap-sound-btn:hover{background:rgba(21,181,191,.12);border-color:var(--turquoise)}
+.ibap .ibap-sound-btn.ibap-on{background:var(--turquoise);border-color:var(--turquoise);color:#fff}
+.ibap .ibap-video-meta-actions{display:flex;align-items:center;gap:.55rem;flex-wrap:wrap}
+.ibap .ibap-hero-cta{display:flex;flex-wrap:wrap;gap:.85rem;justify-content:center;margin-top:clamp(2.4rem,3.6vw,3.4rem)}
+.ibap .ibap-hero-note{
+  text-align:center;margin-top:1.05rem;
+  font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;font-weight:500;
+  color:rgba(255,255,255,.45);
+}
+/* proof row — real stats + credentials */
+.ibap .ibap-proof{
+  margin-top:clamp(48px,6vw,74px);
+  border-top:1px solid var(--line-dark);border-bottom:1px solid var(--line-dark);
+  display:grid;grid-template-columns:repeat(4,1fr);
+}
+.ibap .ibap-proof-item{
+  padding:1.5rem 1.1rem;
+  border-left:1px solid var(--line-dark);
+}
+.ibap .ibap-proof-item:first-child{border-left:none}
+.ibap .ibap-proof-n{
+  display:block;font-family:var(--display);font-weight:300;
+  font-size:clamp(1.9rem,2.6vw,2.4rem);line-height:1;color:#fff;
+  letter-spacing:-.02em;
+}
+.ibap .ibap-proof-n small{font-size:.5em;color:var(--turquoise)}
+.ibap .ibap-proof-label{
+  display:block;margin-top:.6rem;max-width:16ch;
+  font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;font-weight:500;
+  color:rgba(255,255,255,.5);line-height:1.55;
+}
+/* ============================================================
+   THE PATTERN — week timeline
+   ============================================================ */
+.ibap .ibap-timeline{
+  border-top:1px solid var(--line-light);
+  background:rgba(255,255,255,.55);
+  border-radius:var(--r);overflow:hidden;
+  box-shadow:0 1px 0 rgba(12,46,58,.04);
+}
+.ibap .ibap-tl-row{
+  display:grid;
+  grid-template-columns:130px minmax(0,1fr) auto;
+  gap:1.25rem;align-items:center;
+  padding:1.15rem clamp(1rem,2vw,1.5rem);
+  border-bottom:1px solid var(--line-light);
+  opacity:0;transform:translateY(10px);
+  transition:opacity .55s ease-out, transform .55s ease-out;
+}
+.ibap .ibap-tl-row.ibap-in{opacity:1;transform:none}
+.ibap .ibap-tl-day{
+  font-size:.66rem;letter-spacing:.17em;text-transform:uppercase;font-weight:600;
+  color:var(--ink-faint);
+}
+.ibap .ibap-tl-what{
+  font-family:var(--display);font-weight:400;
+  font-size:clamp(1.1rem,1.6vw,1.32rem);letter-spacing:-.012em;line-height:1.2;
+}
+.ibap .ibap-tl-note{
+  display:block;margin-top:.3rem;
+  font-family:var(--body);font-size:.85rem;letter-spacing:0;
+  color:var(--ink-soft);line-height:1.55;
+}
+.ibap .ibap-tl-stamp{
+  justify-self:end;white-space:nowrap;
+  border:1.5px solid rgba(210,67,67,.55);color:var(--stamp);
+  font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;
+  padding:.34rem .7rem;border-radius:3px;
+  transform:rotate(-2deg);
+}
+.ibap .ibap-tl-row--break{
+  background:var(--navy-mid);color:#fff;border-bottom:none;
+  grid-template-columns:130px minmax(0,1fr) auto;
+}
+.ibap .ibap-tl-row--break .ibap-tl-day{color:var(--turquoise)}
+.ibap .ibap-tl-row--break .ibap-tl-note{color:rgba(255,255,255,.72)}
+.ibap .ibap-tl-row--break .ibap-tl-stamp{
+  border-color:var(--turquoise);color:var(--turquoise);
+  background:rgba(21,181,191,.1);
+}
+.ibap .ibap-timeline-foot{
+  margin-top:1.25rem;font-size:.75rem;
+  color:var(--ink-faint);letter-spacing:.02em;
+}
+/* ============================================================
+   THREE QUESTIONS — the video payoff
+   ============================================================ */
+.ibap .ibap-questions{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:0;border-top:1px solid var(--line-dark);
+}
+.ibap .ibap-q{
+  padding:2rem 1.75rem 2.25rem;
+  border-left:1px solid var(--line-dark);
+  display:flex;flex-direction:column;
+}
+.ibap .ibap-q:first-child{border-left:none;padding-left:0}
+.ibap .ibap-q:last-child{padding-right:0}
+.ibap .ibap-q-n{
+  font-family:var(--display);font-weight:300;
+  font-size:clamp(2.4rem,3.4vw,3.1rem);line-height:1;
+  color:var(--turquoise);letter-spacing:-.02em;
+  margin-bottom:1.15rem;font-variant-numeric:tabular-nums;
+}
+.ibap .ibap-q-label{
+  font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;
+  color:rgba(255,255,255,.5);margin-bottom:.7rem;
+}
+.ibap .ibap-q-slot{
+  border:1px dashed rgba(21,181,191,.45);
+  border-radius:var(--r);
+  background:rgba(21,181,191,.05);
+  padding:1rem 1.1rem;
+}
+.ibap .ibap-q-slot-tag{
+  display:block;font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;
+  font-weight:600;color:var(--turquoise);margin-bottom:.5rem;
+}
+.ibap .ibap-q-slot p{font-size:.85rem;line-height:1.6;color:rgba(255,255,255,.62)}
+.ibap .ibap-questions-foot{
+  margin-top:2.25rem;padding-top:1.5rem;border-top:1px solid var(--line-dark);
+  display:flex;align-items:center;justify-content:space-between;
+  gap:1.25rem;flex-wrap:wrap;
+}
+.ibap .ibap-questions-foot p{color:var(--on-navy);max-width:46ch;font-size:.95rem}
+/* ============================================================
+   STEPS
+   ============================================================ */
+.ibap .ibap-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line-light)}
+.ibap .ibap-step{padding:2.1rem 1.9rem 2.3rem;border-left:1px solid var(--line-light);position:relative}
+.ibap .ibap-step:first-child{border-left:none;padding-left:0}
+.ibap .ibap-step:last-child{padding-right:0}
+.ibap .ibap-step-n{
+  display:flex;align-items:baseline;gap:.7rem;margin-bottom:1.15rem;
+  font-family:var(--display);font-weight:300;
+  font-size:clamp(2.2rem,3vw,2.75rem);line-height:1;letter-spacing:-.02em;
+  color:var(--turquoise-deep);font-variant-numeric:tabular-nums;
+}
+.ibap .ibap-step-n em{
+  font-family:var(--body);font-style:normal;
+  font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;
+  color:var(--ink-faint);
+}
+.ibap .ibap-step h3{margin-bottom:.7rem}
+.ibap .ibap-step p{color:var(--ink-soft);font-size:.98rem}
+/* ============================================================
+   ABOUT
+   ============================================================ */
+.ibap .ibap-about{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(32px,5vw,72px);align-items:center}
+.ibap .ibap-portrait{
+  position:relative;aspect-ratio:4/5;border-radius:var(--r);overflow:hidden;
+  border:1px solid rgba(21,181,191,.28);
+  box-shadow:0 24px 60px -32px rgba(7,24,32,.65);
+}
+.ibap .ibap-portrait img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.ibap .ibap-about .ibap-kicker{color:var(--turquoise);display:block;margin-bottom:1.1rem}
+.ibap .ibap-about p{color:var(--on-navy);margin-top:1.3rem}
+.ibap .ibap-creds{list-style:none;margin:2rem 0 0;padding:0;display:grid;gap:.05rem}
+.ibap .ibap-creds li{
+  display:flex;gap:.85rem;align-items:baseline;
+  padding:.8rem 0;border-top:1px solid var(--line-dark);
+  font-size:.82rem;letter-spacing:.02em;color:rgba(255,255,255,.78);
+}
+.ibap .ibap-creds li::before{content:'—';color:var(--turquoise);flex:none}
+.ibap .ibap-portrait-caption{
+  margin-top:.9rem;
+  font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;font-weight:500;
+  color:rgba(255,255,255,.45);line-height:1.6;
+}
+.ibap .ibap-chips{
+  display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.75rem;padding:0;list-style:none;
+}
+.ibap .ibap-chips li{
+  border:1px solid rgba(21,181,191,.3);border-radius:100px;
+  padding:.42rem .85rem;
+  font-size:.72rem;letter-spacing:.04em;font-weight:500;
+  color:rgba(255,255,255,.8);background:rgba(21,181,191,.07);
+}
+/* ============================================================
+   TESTIMONIALS
+   ============================================================ */
+.ibap .ibap-quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.ibap .ibap-quote{
+  background:#fff;border:1px solid var(--line-light);border-radius:var(--r);
+  padding:1.6rem 1.5rem 1.4rem;
+  display:flex;flex-direction:column;
+  box-shadow:0 1px 0 rgba(12,46,58,.04);
+}
+.ibap .ibap-quote-mark{
+  font-family:var(--display);font-size:2.4rem;line-height:.7;
+  color:var(--turquoise);margin-bottom:.6rem;
+}
+.ibap .ibap-quote blockquote{
+  margin:0;font-family:var(--display);font-weight:400;
+  font-size:clamp(1.05rem,1.4vw,1.18rem);line-height:1.34;letter-spacing:-.012em;
+}
+.ibap .ibap-quote p{margin-top:.9rem;font-size:.88rem;line-height:1.62;color:var(--ink-soft)}
+.ibap .ibap-quote cite{
+  margin-top:auto;padding-top:1.2rem;font-style:normal;
+  font-size:.66rem;letter-spacing:.15em;text-transform:uppercase;font-weight:600;
+  color:var(--ink-faint);
+  display:flex;align-items:center;gap:.55rem;
+}
+.ibap .ibap-quote cite::before{content:'';width:16px;height:1px;background:var(--turquoise);flex:none}
+.ibap .ibap-quotes-foot{
+  margin-top:1.75rem;font-size:.82rem;color:var(--ink-soft);
+}
+.ibap .ibap-quotes-foot a{color:var(--turquoise-deep);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.ibap .ibap-quotes-foot a:hover{color:var(--turquoise)}
+/* ============================================================
+   BOOKING
+   ============================================================ */
+.ibap .ibap-book-panel{
+  background:#fff;
+  border:1px solid var(--line-light);
+  border-radius:12px;
+  box-shadow:0 30px 70px -46px rgba(12,46,58,.35);
+  overflow:hidden;
+  display:grid;grid-template-columns:.78fr 1.22fr;
+}
+.ibap .ibap-book-side{padding:clamp(1.8rem,2.6vw,2.4rem);background:var(--navy-mid);color:#fff;display:flex;flex-direction:column;gap:1.5rem}
+.ibap .ibap-book-side h3{font-size:1.45rem}
+.ibap .ibap-book-side .ibap-kicker{color:var(--turquoise)}
+.ibap .ibap-book-list{list-style:none;margin:0;padding:0;display:grid;gap:.9rem}
+.ibap .ibap-book-list li{display:flex;gap:.7rem;font-size:.93rem;color:var(--on-navy);line-height:1.5}
+.ibap .ibap-tick{width:17px;height:17px;flex:none;margin-top:.28rem;border-radius:50%;background:var(--turquoise);display:grid;place-items:center}
+.ibap .ibap-book-side-foot{margin-top:auto;border-top:1px solid var(--line-dark);padding-top:1.3rem}
+.ibap .ibap-book-side-foot a{
+  font-family:var(--display);font-weight:400;font-size:1.45rem;
+  color:var(--turquoise);text-decoration:none;display:block;letter-spacing:-.01em;
+}
+.ibap .ibap-book-side-foot .ibap-kicker{color:rgba(255,255,255,.5);display:block;margin-bottom:.35rem}
+.ibap .ibap-widget-slot{padding:clamp(1.25rem,2.2vw,1.75rem);display:flex;flex-direction:column;min-height:480px}
+.ibap .vexur-calendar-slot{width:100%;flex:1;display:flex;flex-direction:column}
+.ibap .vexur-calendar-slot .vexur-widget{
+  width:100%;max-width:680px;margin-inline:auto;flex:1;min-height:440px;
+}
+/* ============================================================
+   FAQ
+   ============================================================ */
+.ibap .ibap-faq{max-width:820px;margin-inline:auto;border-top:1px solid var(--line-light)}
+.ibap details{border-bottom:1px solid var(--line-light)}
+.ibap summary{
+  list-style:none;cursor:pointer;padding:1.35rem 2.6rem 1.35rem 0;position:relative;
+  font-family:var(--display);font-weight:400;font-size:1.2rem;letter-spacing:-.012em;
+}
+.ibap summary::-webkit-details-marker{display:none}
+.ibap summary::after{
+  content:'+';position:absolute;right:.3rem;top:50%;transform:translateY(-50%);
+  font-size:1.25rem;color:var(--turquoise-deep);transition:transform .25s ease;font-weight:300;
+}
+.ibap details[open] summary::after{content:'–'}
+.ibap details p{padding:0 2.6rem 1.5rem 0;color:var(--ink-soft);font-size:.98rem}
+/* ============================================================
+   FINAL CTA + FOOTER
+   ============================================================ */
+.ibap .ibap-final{text-align:center}
+.ibap .ibap-final h2{max-width:14ch;margin-inline:auto}
+.ibap .ibap-final p{color:var(--on-navy);margin-top:1.3rem;max-width:520px;margin-inline:auto}
+.ibap .ibap-final .ibap-hero-cta{margin-top:2.4rem}
+.ibap .ibap-site-footer{
+  color:rgba(255,255,255,.62);
+  padding-block:clamp(48px,6vw,72px) 2.4rem;
+  border-top:1px solid var(--line-dark);
+  background:
+    radial-gradient(ellipse 120% 80% at 0% -20%, rgba(21,181,191,.12), transparent 50%),
+    radial-gradient(ellipse 80% 60% at 100% 100%, rgba(20,60,75,.45), transparent 45%),
+    linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
+}
+.ibap .ibap-foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:clamp(28px,4vw,56px)}
+.ibap .ibap-foot-grid h4{font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--turquoise);font-weight:600;margin-bottom:1.1rem}
+.ibap .ibap-foot-list{list-style:none;margin:0;padding:0;display:grid;gap:.6rem;font-size:.93rem}
+.ibap .ibap-foot-list a{text-decoration:none;color:rgba(255,255,255,.72)}
+.ibap .ibap-foot-list a:hover{color:var(--turquoise)}
+.ibap .ibap-socials{display:flex;gap:.6rem;margin-top:1.1rem}
+.ibap .ibap-socials a{
+  width:38px;height:38px;border-radius:var(--r);border:1px solid var(--line-dark);
+  display:grid;place-items:center;color:rgba(255,255,255,.7);transition:.2s ease;
+}
+.ibap .ibap-socials a:hover{border-color:var(--turquoise);color:var(--turquoise);transform:translateY(-2px)}
+.ibap .ibap-disclaimer{
+  margin-top:clamp(36px,4vw,54px);padding-top:1.6rem;border-top:1px solid var(--line-dark);
+  font-size:.79rem;line-height:1.75;color:rgba(255,255,255,.42);max-width:900px;
+}
+.ibap .ibap-foot-bar{
+  margin-top:1.6rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.34);
+}
+.ibap .ibap-foot-bar a{text-decoration:none}
+.ibap .ibap-foot-bar a:hover{color:var(--turquoise)}
+/* ============================================================
+   REVEAL
+   ============================================================ */
+.ibap .ibap-rise{opacity:0;transform:translateY(16px);transition:opacity .6s ease-out, transform .6s ease-out}
+.ibap .ibap-rise.ibap-in{opacity:1;transform:none}
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width:1080px){
+.ibap .ibap-site-nav{display:none}
+}
+@media (max-width:980px){
+.ibap .ibap-about{grid-template-columns:1fr}
+.ibap .ibap-portrait{max-width:340px}
+.ibap .ibap-book-panel{grid-template-columns:1fr}
+.ibap .ibap-foot-grid{grid-template-columns:1fr 1fr}
+.ibap .ibap-steps,
+.ibap .ibap-questions{grid-template-columns:1fr;border-top:none}
+.ibap .ibap-step{border-left:none;border-top:1px solid var(--line-light);padding-inline:0}
+.ibap .ibap-q{border-left:none;border-top:1px solid var(--line-dark);padding-inline:0}
+.ibap .ibap-quotes{grid-template-columns:1fr}
+.ibap .ibap-proof{grid-template-columns:1fr 1fr}
+.ibap .ibap-proof-item:nth-child(3){border-left:none}
+.ibap .ibap-proof-item:nth-child(n+3){border-top:1px solid var(--line-dark)}
+}
+@media (max-width:680px){
+.ibap{font-size:16px}
+.ibap .ibap-header-phone{display:none}
+.ibap .ibap-section-head{grid-template-columns:1fr;gap:.9rem}
+.ibap .ibap-section-index{padding-top:0}
+.ibap .ibap-tl-row,
+.ibap .ibap-tl-row--break{
+    grid-template-columns:1fr auto;gap:.5rem 1rem;
+    align-items:start;padding-block:1.05rem;
+  }
+.ibap .ibap-tl-day{grid-column:1 / -1;order:-1}
+.ibap .ibap-tl-stamp{align-self:start}
+.ibap .ibap-foot-grid{grid-template-columns:1fr}
+.ibap .ibap-hero-cta .ibap-btn{width:100%;justify-content:center}
+.ibap .ibap-play{width:62px;height:62px}
+.ibap .ibap-video-meta{justify-content:center}
+.ibap .ibap-questions-foot .ibap-btn{width:100%;justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){
+.ibap *:not(:where([class*="vexur"] *)),
+.ibap *:not(:where([class*="vexur"] *))::before,
+.ibap *:not(:where([class*="vexur"] *))::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
+.ibap .ibap-rise,
+.ibap .ibap-tl-row{opacity:1;transform:none}
+}
+
+
+/* ============================================================
+   EMBED OVERRIDES
+   ============================================================ */
+/* The host page owns the sticky header; a second one fights it,
+   and position:sticky breaks inside transformed builder wrappers. */
+.ibap .ibap-site-header{position:relative;top:auto}
+
+</style>
+
+<div class="ibap">
+<a class="ibap-skip" href="#ibap-book">Skip to booking</a>
+
+<!-- OPTIONAL HEADER — your builder already provides a site header and nav.
+     Delete everything down to "OPTIONAL HEADER ENDS" to avoid a second one. -->
+<div class="ibap-cred-bar">
+  <div class="ibap-wrap ibap-cred-bar-in">
+    <span>Buyer&apos;s Agent of the Year — Customer Service 2025</span>
+    <span>REIWA member</span>
+    <span>Licence RA84804</span>
+  </div>
+</div>
+
+<header class="ibap-site-header" id="ibap-hdr">
+  <div class="ibap-wrap ibap-header-in">
+    <a class="ibap-brand" href="#ibap-top">
+      <span class="ibap-brand-name">Integrity</span>
+      <span class="ibap-brand-sub">Buyers Agent · Perth</span>
+    </a>
+    <nav aria-label="Page sections" class="ibap-site-nav">
+      <a href="#ibap-pattern">The pattern</a>
+      <a href="#ibap-questions">The three questions</a>
+      <a href="#ibap-process">How it works</a>
+      <a href="#ibap-suz">Meet Suz</a>
+      <a href="#ibap-faq">FAQ</a>
+    </nav>
+    <div class="ibap-header-actions">
+      <a class="ibap-header-phone" href="tel:+61434900685"><span class="ibap-dot"></span>0434 900 685</a>
+      <a class="ibap-btn ibap-btn-primary ibap-btn-sm" href="#ibap-book">Book a free call</a>
+    </div>
+  </div>
+</header>
+<!-- OPTIONAL HEADER ENDS -->
+
+<main id="ibap-top">
+<section class="ibap-hero ibap-surface-navy ibap-grain ibap-grid-overlay">
+  <div class="ibap-wrap">
+    <div class="ibap-hero-head">
+      <span class="ibap-kicker">Free video · Perth property market</span>
+      <h1>The three questions to ask a selling agent <span class="ibap-accent">before</span> you make another offer.</h1>
+      <p class="ibap-lede ibap-hero-lede">Perth buyers keep losing homes they could have won. Almost always, it comes down to what they didn't ask. Watch the short video below — then book a free 15-minute call with Suz.</p>
+    </div>
+
+    <div class="ibap-video-shell">
+      <div class="ibap-video-frame" id="ibap-videoFrame">
+        <video
+          id="ibap-heroVideo"
+          playsinline
+          preload="metadata"
+          poster="https://assets.cdn.filesafe.space/dyRpzL4iooux2dbyO1Yo/media/transcoded_videos/90eb72212bbda998.jpg"
+        >
+          <source src="https://storage.googleapis.com/msgsndr/dyRpzL4iooux2dbyO1Yo/media/68d7d905ffd41576d093052f.mp4" type="video/mp4">
+        </video>
+        <div class="ibap-video-overlay" id="ibap-videoOverlay" aria-hidden="false">
+          <button class="ibap-play" id="ibap-playBtn" type="button" aria-label="Play the video">
+            <svg width="24" height="26" viewBox="0 0 24 26" fill="currentColor" aria-hidden="true"><path d="M23 11.3a2 2 0 0 1 0 3.4L3.1 25.7A2 2 0 0 1 0 24V2A2 2 0 0 1 3.1.3L23 11.3Z"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="ibap-video-meta">
+        <span class="ibap-video-meta-label">Suz Hutchings · Integrity Buyers Agent Perth</span>
+        <div class="ibap-video-meta-actions">
+          <button class="ibap-sound-btn" id="ibap-playToggleBtn" type="button" aria-label="Play the video">Play</button>
+          <button class="ibap-sound-btn" id="ibap-soundBtn" type="button">Tap for sound</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="ibap-hero-cta">
+      <a class="ibap-btn ibap-btn-primary" href="#ibap-book">Book your free 15-minute call <span class="ibap-arw">→</span></a>
+      <a class="ibap-btn ibap-btn-ghost" href="tel:+61434900685">Or call 0434 900 685</a>
+    </div>
+    <p class="ibap-hero-note">No obligation · No pressure · 15 minutes</p>
+
+    <div class="ibap-proof">
+      <div class="ibap-proof-item">
+        <span class="ibap-proof-n">25<small>+</small></span>
+        <span class="ibap-proof-label">Buyers successfully represented</span>
+      </div>
+      <div class="ibap-proof-item">
+        <span class="ibap-proof-n">100<small>+</small></span>
+        <span class="ibap-proof-label">Perth agents networked with</span>
+      </div>
+      <div class="ibap-proof-item">
+        <span class="ibap-proof-n">2025</span>
+        <span class="ibap-proof-label">Buyer&apos;s Agent of the Year, Customer Service</span>
+      </div>
+      <div class="ibap-proof-item">
+        <span class="ibap-proof-n">15<small> min</small></span>
+        <span class="ibap-proof-label">First call, free and no obligation</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="ibap-pattern-h" class="ibap-section ibap-surface-blend" id="ibap-pattern">
+  <div class="ibap-wrap">
+    <div class="ibap-section-head ibap-rise">
+      <span class="ibap-section-index">01</span>
+      <div class="ibap-section-head-body">
+        <span class="ibap-kicker">Sound familiar?</span>
+        <h2 id="ibap-pattern-h">The week that keeps repeating.</h2>
+        <p class="ibap-lede">Nothing about the way you&apos;re buying is wrong. You&apos;re just walking in with less information than the person across the table — and nobody tells you by how much you missed.</p>
+      </div>
+    </div>
+
+    <div class="ibap-section-body">
+      <div class="ibap-timeline" id="ibap-timeline">
+        <div class="ibap-tl-row">
+          <span class="ibap-tl-day">Saturday</span>
+          <span class="ibap-tl-what">You inspect
+            <span class="ibap-tl-note">Fourth home open this month. Twenty other people through the door in half an hour.</span>
+          </span>
+        </div>
+        <div class="ibap-tl-row">
+          <span class="ibap-tl-day">Sunday</span>
+          <span class="ibap-tl-what">You offer
+            <span class="ibap-tl-note">Your best number, your cleanest terms, and a note about how much the home means to you.</span>
+          </span>
+        </div>
+        <div class="ibap-tl-row">
+          <span class="ibap-tl-day">Monday</span>
+          <span class="ibap-tl-what">You wait
+            <span class="ibap-tl-note">The agent is &ldquo;presenting all offers to the seller.&rdquo; No indication of where yours sits.</span>
+          </span>
+        </div>
+        <div class="ibap-tl-row">
+          <span class="ibap-tl-day">Tuesday</span>
+          <span class="ibap-tl-what">The listing changes
+            <span class="ibap-tl-note">No feedback on price, no reason given, and no idea what the winning offer actually looked like.</span>
+          </span>
+          <span class="ibap-tl-stamp">Under offer</span>
+        </div>
+        <div class="ibap-tl-row ibap-tl-row--break">
+          <span class="ibap-tl-day">The change</span>
+          <span class="ibap-tl-what">Someone asks the right questions first
+            <span class="ibap-tl-note">Before the offer goes in — what the seller actually needs, and what the competition looks like.</span>
+          </span>
+          <span class="ibap-tl-stamp">Your next home</span>
+        </div>
+      </div>
+      <p class="ibap-timeline-foot">A composite of what Perth buyers describe on the first call. Not a specific property or client.</p>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="ibap-questions-h" class="ibap-section ibap-surface-navy ibap-grain ibap-grid-overlay ibap-bg-dark" id="ibap-questions">
+  <div class="ibap-wrap">
+    <div class="ibap-section-head ibap-rise">
+      <span class="ibap-section-index">02</span>
+      <div class="ibap-section-head-body">
+        <span class="ibap-kicker">What the video covers</span>
+        <h2 id="ibap-questions-h">The three questions, in order.</h2>
+        <p class="ibap-lede">Ask these at your next home open and you stop guessing at the number. Each one is unpacked properly in the video above — with the exact wording to use.</p>
+      </div>
+    </div>
+
+    <div class="ibap-section-body">
+      <!-- =========================================================
+           SUZ TO CONFIRM — replace each .q-slot with the real
+           question from the video. Keep the numbering and layout.
+           ========================================================= -->
+      <div class="ibap-questions">
+        <div class="ibap-q ibap-rise">
+          <span class="ibap-q-n">01</span>
+          <span class="ibap-q-label">Ask before you inspect</span>
+          <div class="ibap-q-slot">
+            <span class="ibap-q-slot-tag">Question one</span>
+            <p>Suz to supply the exact wording of the first question as delivered in the video.</p>
+          </div>
+        </div>
+        <div class="ibap-q ibap-rise">
+          <span class="ibap-q-n">02</span>
+          <span class="ibap-q-label">Ask before you offer</span>
+          <div class="ibap-q-slot">
+            <span class="ibap-q-slot-tag">Question two</span>
+            <p>Suz to supply the exact wording of the second question as delivered in the video.</p>
+          </div>
+        </div>
+        <div class="ibap-q ibap-rise">
+          <span class="ibap-q-n">03</span>
+          <span class="ibap-q-label">Ask before you sign</span>
+          <div class="ibap-q-slot">
+            <span class="ibap-q-slot-tag">Question three</span>
+            <p>Suz to supply the exact wording of the third question as delivered in the video.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="ibap-questions-foot ibap-rise">
+        <p>Prefer to have someone ask them for you, every time, with the agent relationships already in place?</p>
+        <a class="ibap-btn ibap-btn-primary" href="#ibap-book">Book the free 15-minute call <span class="ibap-arw">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="ibap-process-h" class="ibap-section ibap-surface-ice" id="ibap-process">
+  <div class="ibap-wrap">
+    <div class="ibap-section-head ibap-rise">
+      <span class="ibap-section-index">03</span>
+      <div class="ibap-section-head-body">
+        <span class="ibap-kicker">How it works</span>
+        <h2 id="ibap-process-h">Someone on your side of the table.</h2>
+        <p class="ibap-lede">Every other person in the transaction is paid by the seller. This is the part that changes.</p>
+      </div>
+    </div>
+
+    <div class="ibap-section-body">
+      <div class="ibap-steps">
+        <div class="ibap-step ibap-rise">
+          <span class="ibap-step-n">01 <em>The call</em></span>
+          <h3>Fifteen minutes, straight answers</h3>
+          <p>Tell me your suburbs, your budget and your deadline. I&apos;ll tell you straight whether a buyer&apos;s agent is worth it for you — including when the answer is no. There&apos;s no pitch at the end of it.</p>
+        </div>
+        <div class="ibap-step ibap-rise">
+          <span class="ibap-step-n">02 <em>The search</em></span>
+          <h3>On-market and off-market</h3>
+          <p>On-market shortlisting, plus the agent conversations that happen before a listing goes live. You inspect fewer homes, and the ones you do see are worth the Saturday.</p>
+        </div>
+        <div class="ibap-step ibap-rise">
+          <span class="ibap-step-n">03 <em>The offer</em></span>
+          <h3>Built around what the seller needs</h3>
+          <p>I find out what the seller actually wants — settlement date, conditions, certainty — and build the offer around it. Price is only one of the terms you can win on.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="ibap-suz-h" class="ibap-section ibap-surface-navy ibap-grain ibap-grid-overlay ibap-bg-dark" id="ibap-suz">
+  <div class="ibap-wrap">
+    <div class="ibap-section-head ibap-rise">
+      <span class="ibap-section-index">04</span>
+      <div class="ibap-section-head-body">
+        <span class="ibap-kicker">Meet your buyer&apos;s agent</span>
+        <h2 id="ibap-suz-h">I&apos;m Suz. I only ever work for the buyer.</h2>
+      </div>
+    </div>
+
+    <div class="ibap-section-body ibap-about">
+      <div class="ibap-rise">
+        <div class="ibap-portrait">
+          <img
+            alt="Suz Hutchings, buyer's advocate, Integrity Buyers Agent Perth, Western Australia"
+            height="2048"
+            loading="lazy"
+            src="https://integrity-landing-seven.vercel.app/images/suz-landing.jpeg"
+            width="1256"
+          >
+        </div>
+        <p class="ibap-portrait-caption">Susan &ldquo;Suz&rdquo; Hutchings · Principal<br>Safety Bay WA · Serving Perth metro</p>
+      </div>
+      <div class="ibap-rise">
+        <p class="ibap-lede">A few years ago I was a newly single mum trying to buy a home on my own. My pre-approval expired three times, I missed out on homes I loved, and one purchase fell over when finance was declined at the final hurdle. I got there in the end — and then turned everything I&apos;d learned the hard way into a career.</p>
+        <p>Today I represent buyers only, never sellers. Book the call and you&apos;ll get an honest read on where you actually stand: what your budget really buys right now, which suburbs are worth your Saturdays, and what&apos;s been costing you the last few offers.</p>
+        <ul class="ibap-creds">
+          <li>Buyer&apos;s Agent of the Year — Customer Service 2025</li>
+          <li>REIWA member · Real Estate Licence RA84804</li>
+          <li>Perth metro — coastal, river and hills corridors</li>
+          <li>Research, inspections, negotiation and settlement support</li>
+        </ul>
+        <ul class="ibap-chips">
+          <li>First-home buyers</li>
+          <li>Families upsizing or downsizing</li>
+          <li>Singles buying solo</li>
+          <li>Buying again after divorce or life change</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="ibap-reviews-h" class="ibap-section ibap-surface-blend" id="ibap-reviews">
+  <div class="ibap-wrap">
+    <div class="ibap-section-head ibap-rise">
+      <span class="ibap-section-index">05</span>
+      <div class="ibap-section-head-body">
+        <span class="ibap-kicker">In their words</span>
+        <h2 id="ibap-reviews-h">Buyers who stopped missing out.</h2>
+        <p class="ibap-lede">Verbatim reviews from Perth buyers Suz has represented.</p>
+      </div>
+    </div>
+
+    <div class="ibap-section-body">
+      <div class="ibap-quotes">
+        <article class="ibap-quote ibap-rise">
+          <span aria-hidden="true" class="ibap-quote-mark">&ldquo;</span>
+          <blockquote>Our offer was only in front of 7 others by an inch.</blockquote>
+          <p>We were first home buyers navigating the competitive Perth market for the first time. Suz may have been the reason it got over the line, as we made a couple of last-minute adjustments to the figure and conditions.</p>
+          <cite>Miranda Ling</cite>
+        </article>
+        <article class="ibap-quote ibap-rise">
+          <span aria-hidden="true" class="ibap-quote-mark">&ldquo;</span>
+          <blockquote>Her relationship with agents meant we had access to pre-market homes.</blockquote>
+          <p>I&apos;m more than certain without her I would not have secured my home. Suz was the first one the seller&apos;s agent contacted when a higher offer fell through, which allowed me the opportunity to buy despite other buyers having higher offers than me.</p>
+          <cite>Julia Carolyn</cite>
+        </article>
+        <article class="ibap-quote ibap-rise">
+          <span aria-hidden="true" class="ibap-quote-mark">&ldquo;</span>
+          <blockquote>Susan was worth every penny and more.</blockquote>
+          <p>We were at our wits&apos; end with this insane property market. Susan took all that off our plate and got us a home with everything we wanted for a great price.</p>
+          <cite>Kim MCG</cite>
+        </article>
+      </div>
+      <p class="ibap-quotes-foot ibap-rise">More reviews on <a href="https://www.google.com/maps/place/Integrity+Buyers+Agent+Perth/@-32.3107089,115.7378272,16.24z/data=!4m8!3m7!1s0x2a3283565b120e35:0xa3d154674f57c59f!8m2!3d-32.3105751!4d115.7341579!9m1!1b1!16s%2Fg%2F11x21v550k?entry=ttu" rel="noopener noreferrer" target="_blank">Google</a>.</p>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="ibap-book-h" class="ibap-section ibap-surface-ice" id="ibap-book">
+  <div class="ibap-wrap">
+    <div class="ibap-section-head ibap-section-head--center ibap-rise">
+      <span class="ibap-section-index">06</span>
+      <div class="ibap-section-head-body">
+        <span class="ibap-kicker">Free consultation</span>
+        <h2 id="ibap-book-h">Book your free 15-minute call with Suz</h2>
+        <p class="ibap-lede">Pick a time that suits. You&apos;ll get a confirmation by email and a reminder before we speak.</p>
+      </div>
+    </div>
+
+    <div class="ibap-section-body ibap-book-panel ibap-rise">
+      <aside class="ibap-book-side">
+        <span class="ibap-kicker">What we'll cover</span>
+        <h3>Fifteen minutes, four answers.</h3>
+        <ul class="ibap-book-list">
+          <li><span class="ibap-tick"><svg width="9" height="7" viewBox="0 0 9 7" fill="none" aria-hidden="true"><path d="M1 3.4 3.3 5.7 8 1" stroke="#0A2533" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>What your budget realistically buys in your suburbs today</li>
+          <li><span class="ibap-tick"><svg width="9" height="7" viewBox="0 0 9 7" fill="none" aria-hidden="true"><path d="M1 3.4 3.3 5.7 8 1" stroke="#0A2533" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Why your last few offers didn't get across the line</li>
+          <li><span class="ibap-tick"><svg width="9" height="7" viewBox="0 0 9 7" fill="none" aria-hidden="true"><path d="M1 3.4 3.3 5.7 8 1" stroke="#0A2533" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Whether a buyer's agent is worth it in your situation</li>
+          <li><span class="ibap-tick"><svg width="9" height="7" viewBox="0 0 9 7" fill="none" aria-hidden="true"><path d="M1 3.4 3.3 5.7 8 1" stroke="#0A2533" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>The three questions to ask at your next home open</li>
+        </ul>
+        <div class="ibap-book-side-foot">
+          <span class="ibap-kicker">Prefer to talk now?</span>
+          <a href="tel:+61434900685">0434 900 685</a>
+        </div>
+      </aside>
+
+      <div class="ibap-widget-slot">
+        <div class="vexur-calendar-slot">
+          <!-- PASTE EMBED HERE — Vexur calendar (matches main site /book) -->
+          <div
+            class="vexur-widget"
+            data-agent="aa409a6f-4571-4bd0-9fcf-3819a6635bdc"
+            data-consent="pending"
+            data-loader="v2"
+            data-primary-color="#15b5bf"
+            data-show-branding="true"
+            data-theme="light"
+            data-vx-no-fallback="true"
+            data-vx-param-calendar-widget-build-id="ibap-calendar-ac35eab1"
+            data-vx-param-renderer="calendar-render-v2"
+            data-vx-param-v="2026-05-31T00:08:37.115179+00:00"
+            data-widget="calendar"
+          ></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="ibap-faq-h" class="ibap-section ibap-surface-blend" id="ibap-faq">
+  <div class="ibap-wrap">
+    <div class="ibap-section-head ibap-section-head--center ibap-rise">
+      <span class="ibap-section-index">07</span>
+      <div class="ibap-section-head-body">
+        <span class="ibap-kicker">Before you book</span>
+        <h2 id="ibap-faq-h">The usual questions.</h2>
+      </div>
+    </div>
+    <div class="ibap-section-body ibap-faq">
+      <details>
+        <summary>Do I have to be ready to buy right now?</summary>
+        <p>No. Plenty of the people I speak to are three to six months away. Knowing what to fix in your finance, your search area or your offer strategy before you're in the market is usually worth more than doing it in a rush afterwards.</p>
+      </details>
+      <details>
+        <summary>What does a buyer's agent actually cost?</summary>
+        <p>Fees depend on the service and the price bracket, and I'll walk you through the numbers plainly on the call — before you commit to anything. The 15-minute consultation itself is free.</p>
+      </details>
+      <details>
+        <summary>Do you work with first-home buyers?</summary>
+        <p>Yes. First-home buyers are often the ones losing the most offers, because they're competing against people who've done this three or four times before.</p>
+      </details>
+      <details>
+        <summary>Which parts of Perth do you cover?</summary>
+        <p>Perth metro — coastal, river and hills corridors. If your search area sits outside where I can genuinely add value, I'll say so on the call and point you somewhere better.</p>
+      </details>
+      <details>
+        <summary>Is this a sales call?</summary>
+        <p>It's a conversation about your situation. If a buyer's agent isn't the right answer for you, that's a perfectly good outcome for fifteen minutes.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="ibap-section ibap-surface-navy ibap-grain ibap-grid-overlay ibap-final">
+  <div class="ibap-wrap">
+    <h2>Stop losing homes you could have won.</h2>
+    <p class="ibap-lede">Fifteen minutes, no obligation, and an honest read on where you stand in this market.</p>
+    <div class="ibap-hero-cta">
+      <a class="ibap-btn ibap-btn-primary" href="#ibap-book">Book your free 15-minute call <span class="ibap-arw">→</span></a>
+      <a class="ibap-btn ibap-btn-ghost" href="tel:+61434900685">0434 900 685</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="ibap-site-footer">
+  <div class="ibap-wrap">
+    <div class="ibap-foot-grid">
+      <div>
+        <a class="ibap-brand" href="#ibap-top" style="margin-bottom:1rem">
+          <span class="ibap-brand-name">Integrity</span>
+          <span class="ibap-brand-sub">Buyers Agent · Perth</span>
+        </a>
+        <p style="font-size:.92rem;margin-top:1rem;max-width:34ch;color:rgba(255,255,255,.62)">Buyer's advocacy for Perth families and singles — on-market and off-market.</p>
+        <div class="ibap-socials">
+          <a href="https://www.facebook.com/profile.php?id=61559169513671" aria-label="Facebook" rel="noopener noreferrer" target="_blank"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.413c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.971H15.83c-1.491 0-1.956.93-1.956 1.886v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073Z"/></svg></a>
+          <a href="https://www.instagram.com/susan_buyers_agent_perth" aria-label="Instagram" rel="noopener noreferrer" target="_blank"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul class="ibap-foot-list">
+          <li><a href="tel:+61434900685">0434 900 685</a></li>
+          <li><a href="mailto:suz@integritybuyersagentperth.com.au">suz@integritybuyersagentperth.com.au</a></li>
+          <li>Safety Bay WA · Perth metro</li>
+        </ul>
+      </div>
+      <div>
+        <h4>On this page</h4>
+        <ul class="ibap-foot-list">
+          <li><a href="#ibap-top">Watch the video</a></li>
+          <li><a href="#ibap-questions">The three questions</a></li>
+          <li><a href="#ibap-process">How it works</a></li>
+          <li><a href="#ibap-book">Book a free call</a></li>
+          <li><a href="https://integritybuyersagentperth.com.au/">Main website</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="ibap-disclaimer"><strong>Important note:</strong> Always do your own research before making a decision. This information is general in nature and does not take into account your personal financial situation. It is for educational purposes only and does not constitute formal financial advice. You should always seek personal financial advice that is tailored to your specific needs.</p>
+
+    <div class="ibap-foot-bar">
+      <span>© 2026 Integrity Buyers Agent Perth</span>
+      <span>Buyer&apos;s Agent of the Year, Customer Service 2025</span>
+      <span>REIWA member · Licence RA84804</span>
+    </div>
+  </div>
+</footer>
+</div>
+
+<script
+  src="https://embed.vexur.com.au/v1.1.3/loader.js"
+  integrity="sha384-ZLXHLho7y0iMKrr429AOC0e+7u6l1OA953azo2BgQWXSLxfXKR8gONGcs1teL7+u"
+  crossorigin="anonymous"
+  async
+></script>
+
+<script>
+
+(function(){
+  var root = document.querySelector('.ibap');
+  if(!root) return;
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* sticky header */
+  var hdr = document.getElementById('ibap-hdr');
+  var onScroll = function(){ hdr && hdr.classList.toggle('ibap-stuck', window.scrollY > 40); };
+  onScroll();
+  window.addEventListener('scroll', onScroll, {passive:true});
+
+  /* reveal on scroll */
+  if('IntersectionObserver' in window && !reduce){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('ibap-in'); io.unobserve(e.target); }
+      });
+    },{threshold:.18, rootMargin:'0px 0px -8% 0px'});
+    root.querySelectorAll('.ibap-rise').forEach(function(el){ io.observe(el); });
+
+    /* timeline rows land one after another */
+    var timeline = document.getElementById('ibap-timeline');
+    if(timeline){
+      var rows = timeline.querySelectorAll('.ibap-tl-row');
+      var tio = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(!e.isIntersecting) return;
+          rows.forEach(function(row,i){ setTimeout(function(){ row.classList.add('ibap-in'); }, i*140); });
+          tio.disconnect();
+        });
+      },{threshold:.2});
+      tio.observe(timeline);
+    }
+  } else {
+    root.querySelectorAll('.ibap-rise, .ibap-tl-row').forEach(function(el){ el.classList.add('ibap-in'); });
+  }
+
+  /* video — from existing GHL landing page VSL */
+  var video = document.getElementById('ibap-heroVideo');
+  var overlay = document.getElementById('ibap-videoOverlay');
+  var soundBtn = document.getElementById('ibap-soundBtn');
+  var playBtn = document.getElementById('ibap-playBtn');
+  var playToggleBtn = document.getElementById('ibap-playToggleBtn');
+
+  function syncSoundBtn(){
+    soundBtn.classList.toggle('ibap-on', !video.muted);
+    soundBtn.textContent = video.muted ? 'Tap for sound' : 'Sound on';
+  }
+
+  function syncPlayToggle(){
+    var playing = !video.paused && !video.ended;
+    playToggleBtn.classList.toggle('ibap-on', playing);
+    playToggleBtn.textContent = playing ? 'Pause' : 'Play';
+    playToggleBtn.setAttribute('aria-label', playing ? 'Pause the video' : 'Play the video');
+  }
+
+  function showOverlay(){
+    overlay.classList.remove('ibap-hidden');
+    overlay.setAttribute('aria-hidden', 'false');
+  }
+
+  function hideOverlay(){
+    overlay.classList.add('ibap-hidden');
+    overlay.setAttribute('aria-hidden', 'true');
+  }
+
+  function playVideo(unmute){
+    if(typeof unmute === 'boolean'){ video.muted = !unmute; }
+    hideOverlay();
+    syncSoundBtn();
+    syncPlayToggle();
+    video.play().catch(function(){});
+  }
+
+  function pauseVideo(){
+    video.pause();
+    showOverlay();
+    syncPlayToggle();
+  }
+
+  if(video && overlay && soundBtn && playBtn && playToggleBtn){
+  playBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      if(video.ended){ video.currentTime = 0; }
+      playVideo(true);
+    });
+    overlay.addEventListener('click', function(e){
+      if(e.target === overlay){
+        if(video.ended){ video.currentTime = 0; }
+        playVideo(true);
+      }
+    });
+    playToggleBtn.addEventListener('click', function(){
+      if(video.paused || video.ended){
+        var restart = video.ended;
+        if(restart){ video.currentTime = 0; }
+        playVideo(restart ? true : undefined);
+        return;
+      }
+      pauseVideo();
+    });
+    soundBtn.addEventListener('click', function(){
+      if(video.paused){ playVideo(true); return; }
+      video.muted = !video.muted;
+      syncSoundBtn();
+    });
+    video.addEventListener('play', syncPlayToggle);
+    video.addEventListener('pause', syncPlayToggle);
+    video.addEventListener('ended', function(){
+      showOverlay();
+      syncPlayToggle();
+    });
+    syncPlayToggle();
+  }
+
+  /* Vexur calendar mount */
+  var attempts = 0;
+  function mountCalendar(){
+    attempts += 1;
+    if(window.VexurWidgetLoader && window.VexurWidgetLoader.mountAll){
+      window.VexurWidgetLoader.mountAll();
+      return;
+    }
+    if(attempts < 120){ setTimeout(mountCalendar, 50); }
+  }
+  mountCalendar();
+})();
+
+</script>

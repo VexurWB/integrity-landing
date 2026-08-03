@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Host builder simulation</title>
+<style>
+/* Deliberately hostile "website builder" theme: generic class names that
+   collide with the landing page, plus aggressive element defaults. */
+*{box-sizing:content-box}
+body{
+  margin:0;font-family:Verdana,Arial,sans-serif;font-size:14px;
+  text-align:center;line-height:2.4;color:#333;background:#fffbe6;
+  text-transform:uppercase;letter-spacing:2px;
+}
+h1,h2,h3,h4{font-family:"Comic Sans MS",cursive;margin:60px 0;color:#c0392b}
+p{margin:34px 0;color:#8e44ad}
+ul,ol{list-style:square;padding-left:56px;margin:30px 0}
+li{margin:14px 0;color:#d35400}
+a{color:#0000ee;text-decoration:underline dotted 3px}
+img,video{border:6px solid #2ecc71;max-width:none}
+button,summary{font-family:"Comic Sans MS",cursive;background:#e74c3c;color:#fff;border:4px dashed #000}
+blockquote,cite,figure{margin:50px;font-style:italic}
+section{padding:0;background:#ffeaa7}
+
+/* Same class names the landing page uses. */
+.wrap{max-width:220px;margin:0;padding:0}
+.section{padding:0;background:#ff7675}
+.btn{display:inline;background:#000;color:#0f0;padding:0;border-radius:0;font-size:9px}
+.brand{font-size:9px}
+.kicker{font-size:30px;color:#e84393}
+.lede{font-size:9px}
+.step,.q,.quote{background:#dfe6e9;border:4px dotted #000}
+.section-head{border:none}
+.rise{opacity:1}
+.in{opacity:1}
+
+.host-chrome{background:#2d3436;color:#fff;padding:18px;font-size:13px}
+</style>
+</head>
+<body>
+
+<div class="host-chrome" id="top">HOST SITE HEADER — id="top", .wrap, .section, .btn all defined by the theme</div>
+
+<section class="section">
+  <div class="wrap">
+    <h2>Host page content above the embed</h2>
+    <p>This paragraph and heading must keep the ugly host styling.</p>
+    <a class="btn" href="#top">Host button</a>
+  </div>
+</section>
+
+<!-- ================= EMBED STARTS ================= -->
+<!--#include builder-embed.html -->
+<!-- ================= EMBED ENDS ================= -->
+
+<section class="section">
+  <div class="wrap">
+    <h2>Host page content below the embed</h2>
+    <p>Still ugly, still uppercase, still Comic Sans.</p>
+  </div>
+</section>
+
+<script>
+/* Inline the embed the way a builder would drop it into the page. */
+fetch('builder-embed.html')
+  .then(function(r){ return r.text(); })
+  .then(function(html){
+    var marker = document.createComment('embed');
+    var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_COMMENT);
+    var node, target = null;
+    while((node = walker.nextNode())){
+      if(node.nodeValue.indexOf('#include builder-embed.html') !== -1){ target = node; break; }
+    }
+    var host = document.createElement('div');
+    host.innerHTML = html;
+    /* innerHTML does not execute scripts — re-create them so the page behaves
+       exactly like a builder that allows scripts. */
+    var scripts = Array.prototype.slice.call(host.querySelectorAll('script'));
+    scripts.forEach(function(old){ old.parentNode.removeChild(old); });
+    target.parentNode.insertBefore(host, target);
+    scripts.forEach(function(old){
+      var s = document.createElement('script');
+      if(old.src){ s.src = old.src; s.async = false; }
+      else { s.textContent = old.textContent; }
+      document.body.appendChild(s);
+    });
+  });
+</script>
+</body>
+</html>
