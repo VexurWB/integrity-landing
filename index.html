@@ -38,12 +38,16 @@
   --body:'Inter', system-ui, sans-serif;
 
   --wrap: 1180px;
+  --measure: 62ch;
   --r: 8px;
-  --pad-y: clamp(72px, 9vw, 132px);
+  --pad-y: clamp(76px, 9vw, 136px);
+  --gap-head: clamp(40px, 5vw, 64px);
+  --header-h: 68px;
 }
 
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+[id]{scroll-margin-top:calc(var(--header-h) + 24px)}
 body{
   margin:0;
   background:var(--ice);
@@ -132,6 +136,39 @@ p{margin:0}
    ============================================================ */
 .wrap{width:min(100% - 44px, var(--wrap));margin-inline:auto}
 .section{padding-block:var(--pad-y);position:relative}
+.skip{
+  position:absolute;left:-9999px;top:0;z-index:100;
+  background:var(--turquoise);color:#fff;padding:.75rem 1.1rem;
+  font-size:.8rem;font-weight:600;text-decoration:none;border-radius:0 0 var(--r) 0;
+}
+.skip:focus{left:0}
+
+/* ============================================================
+   SECTION HEADS — editorial index + rule + measure
+   ============================================================ */
+.section-head{
+  display:grid;grid-template-columns:auto 1fr;
+  gap:0 clamp(20px,3vw,44px);
+  padding-top:1.4rem;border-top:1px solid var(--line-light);
+}
+.bg-dark .section-head{border-top-color:var(--line-dark)}
+.section-index{
+  font-family:var(--display);font-size:1.1rem;font-weight:400;
+  color:var(--turquoise-deep);line-height:1;padding-top:.35rem;
+  font-variant-numeric:tabular-nums;
+}
+.bg-dark .section-index{color:var(--turquoise)}
+.section-head-body{max-width:var(--measure)}
+.section-head .kicker{display:block;margin-bottom:.85rem;color:var(--turquoise-deep)}
+.bg-dark .section-head .kicker{color:var(--turquoise)}
+.section-head p{color:var(--ink-soft);margin-top:1.15rem}
+.bg-dark .section-head p{color:var(--on-navy)}
+.section-head--center{
+  grid-template-columns:1fr;text-align:center;justify-items:center;
+  max-width:720px;margin-inline:auto;
+}
+.section-head--center .section-head-body{max-width:56ch}
+.section-body{margin-top:var(--gap-head)}
 
 /* ============================================================
    BUTTONS — .cta-gradient from globals.css
@@ -173,6 +210,27 @@ p{margin:0}
 .btn-sm{padding:.72rem 1.15rem;font-size:.875rem}
 
 /* ============================================================
+   CREDENTIAL BAR
+   ============================================================ */
+.cred-bar{
+  background:var(--navy-deep);
+  color:rgba(255,255,255,.62);
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+.cred-bar-in{
+  display:flex;align-items:center;justify-content:center;
+  gap:clamp(.9rem,2.4vw,2rem);flex-wrap:wrap;
+  padding-block:.6rem;
+  font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;font-weight:500;
+  text-align:center;
+}
+.cred-bar-in span{display:inline-flex;align-items:center;gap:.55rem}
+.cred-bar-in span::before{
+  content:'';width:4px;height:4px;border-radius:50%;
+  background:var(--turquoise);flex:none;
+}
+
+/* ============================================================
    HEADER
    ============================================================ */
 .site-header{
@@ -204,6 +262,20 @@ p{margin:0}
 }
 .header-phone .dot{width:6px;height:6px;border-radius:50%;background:var(--turquoise);flex:none}
 .header-phone:hover{color:var(--turquoise)}
+
+.site-nav{display:flex;align-items:center;gap:clamp(1rem,2.2vw,1.9rem)}
+.site-nav a{
+  font-size:.8rem;font-weight:500;letter-spacing:.01em;
+  color:rgba(255,255,255,.72);text-decoration:none;
+  padding-block:.3rem;position:relative;white-space:nowrap;
+  transition:color .2s ease;
+}
+.site-nav a::after{
+  content:'';position:absolute;left:0;right:100%;bottom:0;height:1px;
+  background:var(--turquoise);transition:right .25s ease;
+}
+.site-nav a:hover{color:#fff}
+.site-nav a:hover::after{right:0}
 
 /* ============================================================
    HERO
@@ -244,103 +316,175 @@ p{margin:0}
   70%{box-shadow:0 0 0 26px rgba(21,181,191,0)}
   100%{box-shadow:0 0 0 0 rgba(21,181,191,0)}
 }
-.sound-pill{
-  position:absolute;left:50%;transform:translateX(-50%);
-  bottom:-19px;z-index:2;
-  display:inline-flex;align-items:center;gap:.5rem;
-  background:var(--turquoise);color:#fff;
-  font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;
-  padding:.5rem 1rem;border-radius:100px;border:none;cursor:pointer;
-  box-shadow:0 10px 24px -12px rgba(0,0,0,.55);
+/* video meta bar — replaces the floating pill */
+.video-meta{
+  margin-top:.85rem;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:1rem;flex-wrap:wrap;
 }
-.sound-pill:hover{background:var(--turquoise-light)}
-.sound-pill.muted{background:var(--navy-accent)}
+.video-meta-label{
+  font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;font-weight:500;
+  color:rgba(255,255,255,.48);
+  display:inline-flex;align-items:center;gap:.6rem;
+}
+.video-meta-label::before{
+  content:'';width:18px;height:1px;background:rgba(21,181,191,.6);flex:none;
+}
+.sound-btn{
+  display:inline-flex;align-items:center;gap:.55rem;
+  background:transparent;color:var(--turquoise);
+  border:1px solid rgba(21,181,191,.4);
+  font-family:var(--body);
+  font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;
+  padding:.5rem .95rem;border-radius:100px;cursor:pointer;
+  transition:background .2s ease, border-color .2s ease, color .2s ease;
+}
+.sound-btn:hover{background:rgba(21,181,191,.12);border-color:var(--turquoise)}
+.sound-btn.on{background:var(--turquoise);border-color:var(--turquoise);color:#fff}
 
-.hero-cta{display:flex;flex-wrap:wrap;gap:.85rem;justify-content:center;margin-top:3.4rem}
+.hero-cta{display:flex;flex-wrap:wrap;gap:.85rem;justify-content:center;margin-top:clamp(2.4rem,3.6vw,3.4rem)}
 .hero-note{
   text-align:center;margin-top:1.05rem;
   font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;font-weight:500;
   color:rgba(255,255,255,.45);
 }
 
-.trust{
+/* proof row — real stats + credentials */
+.proof{
   margin-top:clamp(48px,6vw,74px);
   border-top:1px solid var(--line-dark);border-bottom:1px solid var(--line-dark);
   display:grid;grid-template-columns:repeat(4,1fr);
 }
-.trust-item{
-  padding:1.25rem .9rem;text-align:center;
+.proof-item{
+  padding:1.5rem 1.1rem;
   border-left:1px solid var(--line-dark);
-  font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;font-weight:500;
-  color:rgba(255,255,255,.68);
 }
-.trust-item:first-child{border-left:none}
-.trust-item b{display:block;color:var(--turquoise);font-weight:600;margin-bottom:.2rem}
+.proof-item:first-child{border-left:none}
+.proof-n{
+  display:block;font-family:var(--display);font-weight:300;
+  font-size:clamp(1.9rem,2.6vw,2.4rem);line-height:1;color:#fff;
+  letter-spacing:-.02em;
+}
+.proof-n small{font-size:.5em;color:var(--turquoise)}
+.proof-label{
+  display:block;margin-top:.6rem;max-width:16ch;
+  font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;font-weight:500;
+  color:rgba(255,255,255,.5);line-height:1.55;
+}
 
 /* ============================================================
-   PROBLEM / STAMP CARDS
+   THE PATTERN — week timeline
    ============================================================ */
-.head-block{max-width:660px}
-.head-block .kicker{color:var(--turquoise-deep);margin-bottom:1.1rem;display:block}
-.head-block p{color:var(--ink-soft);margin-top:1.3rem}
-
-.ledger{
-  margin-top:clamp(40px,5vw,60px);
-  display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
-}
-.lot{
-  position:relative;background:#fff;
-  border:1px solid var(--line-light);border-radius:var(--r);
-  padding:1.35rem 1.35rem 1.5rem;
-  min-height:158px;display:flex;flex-direction:column;justify-content:space-between;
+.timeline{
+  border-top:1px solid var(--line-light);
+  background:rgba(255,255,255,.55);
+  border-radius:var(--r);overflow:hidden;
   box-shadow:0 1px 0 rgba(12,46,58,.04);
-  overflow:hidden;
 }
-.lot-meta{
-  font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;font-weight:500;
+.tl-row{
+  display:grid;
+  grid-template-columns:130px minmax(0,1fr) auto;
+  gap:1.25rem;align-items:center;
+  padding:1.15rem clamp(1rem,2vw,1.5rem);
+  border-bottom:1px solid var(--line-light);
+  opacity:0;transform:translateY(10px);
+  transition:opacity .55s ease-out, transform .55s ease-out;
+}
+.tl-row.in{opacity:1;transform:none}
+.tl-day{
+  font-size:.66rem;letter-spacing:.17em;text-transform:uppercase;font-weight:600;
   color:var(--ink-faint);
 }
-.lot-addr{
+.tl-what{
   font-family:var(--display);font-weight:400;
-  font-size:1.35rem;letter-spacing:-.015em;margin-top:.5rem;line-height:1.12;
+  font-size:clamp(1.1rem,1.6vw,1.32rem);letter-spacing:-.012em;line-height:1.2;
 }
-.lot-spec{font-size:.82rem;color:var(--ink-soft);margin-top:.35rem}
-.stamp{
-  position:absolute;right:-6px;bottom:14px;
-  transform:rotate(-8deg) scale(.86);
-  border:2px solid var(--stamp);color:var(--stamp);
-  font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;
-  padding:.32rem .7rem;border-radius:3px;
-  opacity:0;mix-blend-mode:multiply;
-  transition:opacity .5s ease, transform .5s cubic-bezier(.2,.9,.3,1.2);
+.tl-note{
+  display:block;margin-top:.3rem;
+  font-family:var(--body);font-size:.85rem;letter-spacing:0;
+  color:var(--ink-soft);line-height:1.55;
 }
-.lot.in .stamp{opacity:.9;transform:rotate(-8deg) scale(1)}
-.lot.win{background:var(--navy-mid);border-color:var(--navy-mid);color:#fff}
-.lot.win .lot-meta{color:var(--turquoise)}
-.lot.win .lot-spec{color:rgba(255,255,255,.72)}
-.lot.win .stamp{border-color:var(--turquoise);color:var(--turquoise);mix-blend-mode:normal}
-.lot.win.in .stamp{opacity:1;transform:rotate(-8deg) scale(1)}
-.lot-tag{
-  position:absolute;top:0;left:0;
-  background:var(--turquoise);color:#fff;
-  font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;
-  padding:.3rem .6rem;border-bottom-right-radius:var(--r);
+.tl-stamp{
+  justify-self:end;white-space:nowrap;
+  border:1.5px solid rgba(210,67,67,.55);color:var(--stamp);
+  font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;
+  padding:.34rem .7rem;border-radius:3px;
+  transform:rotate(-2deg);
 }
-.ledger-foot{
-  margin-top:1.6rem;font-size:.75rem;
-  color:var(--ink-faint);letter-spacing:.03em;
+.tl-row--break{
+  background:var(--navy-mid);color:#fff;border-bottom:none;
+  grid-template-columns:130px minmax(0,1fr) auto;
 }
+.tl-row--break .tl-day{color:var(--turquoise)}
+.tl-row--break .tl-note{color:rgba(255,255,255,.72)}
+.tl-row--break .tl-stamp{
+  border-color:var(--turquoise);color:var(--turquoise);
+  background:rgba(21,181,191,.1);
+}
+.timeline-foot{
+  margin-top:1.25rem;font-size:.75rem;
+  color:var(--ink-faint);letter-spacing:.02em;
+}
+
+/* ============================================================
+   THREE QUESTIONS — the video payoff
+   ============================================================ */
+.questions{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:0;border-top:1px solid var(--line-dark);
+}
+.q{
+  padding:2rem 1.75rem 2.25rem;
+  border-left:1px solid var(--line-dark);
+  display:flex;flex-direction:column;
+}
+.q:first-child{border-left:none;padding-left:0}
+.q:last-child{padding-right:0}
+.q-n{
+  font-family:var(--display);font-weight:300;
+  font-size:clamp(2.4rem,3.4vw,3.1rem);line-height:1;
+  color:var(--turquoise);letter-spacing:-.02em;
+  margin-bottom:1.15rem;font-variant-numeric:tabular-nums;
+}
+.q-label{
+  font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;
+  color:rgba(255,255,255,.5);margin-bottom:.7rem;
+}
+.q-slot{
+  border:1px dashed rgba(21,181,191,.45);
+  border-radius:var(--r);
+  background:rgba(21,181,191,.05);
+  padding:1rem 1.1rem;
+}
+.q-slot-tag{
+  display:block;font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;
+  font-weight:600;color:var(--turquoise);margin-bottom:.5rem;
+}
+.q-slot p{font-size:.85rem;line-height:1.6;color:rgba(255,255,255,.62)}
+.questions-foot{
+  margin-top:2.25rem;padding-top:1.5rem;border-top:1px solid var(--line-dark);
+  display:flex;align-items:center;justify-content:space-between;
+  gap:1.25rem;flex-wrap:wrap;
+}
+.questions-foot p{color:var(--on-navy);max-width:46ch;font-size:.95rem}
 
 /* ============================================================
    STEPS
    ============================================================ */
-.steps{margin-top:clamp(40px,5vw,60px);display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line-light)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line-light)}
 .step{padding:2.1rem 1.9rem 2.3rem;border-left:1px solid var(--line-light);position:relative}
 .step:first-child{border-left:none;padding-left:0}
 .step:last-child{padding-right:0}
 .step-n{
-  font-size:.7rem;letter-spacing:.18em;font-weight:600;color:var(--turquoise-deep);
-  display:block;margin-bottom:1.1rem;text-transform:uppercase;
+  display:flex;align-items:baseline;gap:.7rem;margin-bottom:1.15rem;
+  font-family:var(--display);font-weight:300;
+  font-size:clamp(2.2rem,3vw,2.75rem);line-height:1;letter-spacing:-.02em;
+  color:var(--turquoise-deep);font-variant-numeric:tabular-nums;
+}
+.step-n em{
+  font-family:var(--body);font-style:normal;
+  font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;
+  color:var(--ink-faint);
 }
 .step h3{margin-bottom:.7rem}
 .step p{color:var(--ink-soft);font-size:.98rem}
@@ -365,15 +509,57 @@ p{margin:0}
 }
 .creds li::before{content:'—';color:var(--turquoise);flex:none}
 
+.portrait-caption{
+  margin-top:.9rem;
+  font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;font-weight:500;
+  color:rgba(255,255,255,.45);line-height:1.6;
+}
+.chips{
+  display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.75rem;padding:0;list-style:none;
+}
+.chips li{
+  border:1px solid rgba(21,181,191,.3);border-radius:100px;
+  padding:.42rem .85rem;
+  font-size:.72rem;letter-spacing:.04em;font-weight:500;
+  color:rgba(255,255,255,.8);background:rgba(21,181,191,.07);
+}
+
+/* ============================================================
+   TESTIMONIALS
+   ============================================================ */
+.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.quote{
+  background:#fff;border:1px solid var(--line-light);border-radius:var(--r);
+  padding:1.6rem 1.5rem 1.4rem;
+  display:flex;flex-direction:column;
+  box-shadow:0 1px 0 rgba(12,46,58,.04);
+}
+.quote-mark{
+  font-family:var(--display);font-size:2.4rem;line-height:.7;
+  color:var(--turquoise);margin-bottom:.6rem;
+}
+.quote blockquote{
+  margin:0;font-family:var(--display);font-weight:400;
+  font-size:clamp(1.05rem,1.4vw,1.18rem);line-height:1.34;letter-spacing:-.012em;
+}
+.quote p{margin-top:.9rem;font-size:.88rem;line-height:1.62;color:var(--ink-soft)}
+.quote cite{
+  margin-top:auto;padding-top:1.2rem;font-style:normal;
+  font-size:.66rem;letter-spacing:.15em;text-transform:uppercase;font-weight:600;
+  color:var(--ink-faint);
+  display:flex;align-items:center;gap:.55rem;
+}
+.quote cite::before{content:'';width:16px;height:1px;background:var(--turquoise);flex:none}
+.quotes-foot{
+  margin-top:1.75rem;font-size:.82rem;color:var(--ink-soft);
+}
+.quotes-foot a{color:var(--turquoise-deep);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.quotes-foot a:hover{color:var(--turquoise)}
+
 /* ============================================================
    BOOKING
    ============================================================ */
-.book-head{text-align:center;max-width:640px;margin-inline:auto}
-.book-head .kicker{color:var(--turquoise-deep);display:block;margin-bottom:1.1rem}
-.book-head p{color:var(--ink-soft);margin-top:1.2rem}
-
 .book-panel{
-  margin-top:clamp(34px,4vw,50px);
   background:#fff;
   border:1px solid var(--line-light);
   border-radius:12px;
@@ -403,7 +589,7 @@ p{margin:0}
 /* ============================================================
    FAQ
    ============================================================ */
-.faq{margin-top:clamp(34px,4vw,50px);max-width:820px;margin-inline:auto;border-top:1px solid var(--line-light)}
+.faq{max-width:820px;margin-inline:auto;border-top:1px solid var(--line-light)}
 details{border-bottom:1px solid var(--line-light)}
 summary{
   list-style:none;cursor:pointer;padding:1.35rem 2.6rem 1.35rem 0;position:relative;
@@ -465,36 +651,58 @@ details p{padding:0 2.6rem 1.5rem 0;color:var(--ink-soft);font-size:.98rem}
 /* ============================================================
    RESPONSIVE
    ============================================================ */
+@media (max-width:1080px){
+  .site-nav{display:none}
+}
 @media (max-width:980px){
   .about{grid-template-columns:1fr}
   .portrait{max-width:340px}
   .book-panel{grid-template-columns:1fr}
   .foot-grid{grid-template-columns:1fr 1fr}
-  .ledger{grid-template-columns:repeat(2,1fr)}
-  .steps{grid-template-columns:1fr;border-top:none}
+  .steps,.questions{grid-template-columns:1fr;border-top:none}
   .step{border-left:none;border-top:1px solid var(--line-light);padding-inline:0}
+  .q{border-left:none;border-top:1px solid var(--line-dark);padding-inline:0}
+  .quotes{grid-template-columns:1fr}
+  .proof{grid-template-columns:1fr 1fr}
+  .proof-item:nth-child(3){border-left:none}
+  .proof-item:nth-child(n+3){border-top:1px solid var(--line-dark)}
 }
 @media (max-width:680px){
   body{font-size:16px}
   .header-phone{display:none}
-  .trust{grid-template-columns:1fr 1fr}
-  .trust-item:nth-child(3){border-left:none}
-  .trust-item:nth-child(n+3){border-top:1px solid var(--line-dark)}
-  .ledger{grid-template-columns:1fr}
+  .section-head{grid-template-columns:1fr;gap:.9rem}
+  .section-index{padding-top:0}
+  .tl-row,.tl-row--break{
+    grid-template-columns:1fr auto;gap:.5rem 1rem;
+    align-items:start;padding-block:1.05rem;
+  }
+  .tl-day{grid-column:1 / -1;order:-1}
+  .tl-stamp{align-self:start}
   .foot-grid{grid-template-columns:1fr}
   .hero-cta .btn{width:100%;justify-content:center}
   .play{width:62px;height:62px}
+  .video-meta{justify-content:center}
+  .questions-foot .btn{width:100%;justify-content:center}
 }
 
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important}
-  .rise{opacity:1;transform:none}
-  .lot .stamp{opacity:.9}
+  .rise,.tl-row{opacity:1;transform:none}
 }
 </style>
 </head>
 
 <body>
+
+<a class="skip" href="#book">Skip to booking</a>
+
+<div class="cred-bar">
+  <div class="wrap cred-bar-in">
+    <span>Buyer&apos;s Agent of the Year — Customer Service 2025</span>
+    <span>REIWA member</span>
+    <span>Licence RA84804</span>
+  </div>
+</div>
 
 <header class="site-header" id="hdr">
   <div class="wrap header-in">
@@ -502,6 +710,13 @@ details p{padding:0 2.6rem 1.5rem 0;color:var(--ink-soft);font-size:.98rem}
       <span class="brand-name">Integrity</span>
       <span class="brand-sub">Buyers Agent · Perth</span>
     </a>
+    <nav aria-label="Page sections" class="site-nav">
+      <a href="#pattern">The pattern</a>
+      <a href="#questions">The three questions</a>
+      <a href="#process">How it works</a>
+      <a href="#suz">Meet Suz</a>
+      <a href="#faq">FAQ</a>
+    </nav>
     <div class="header-actions">
       <a class="header-phone" href="tel:+61434900685"><span class="dot"></span>0434 900 685</a>
       <a class="btn btn-primary btn-sm" href="#book">Book a free call</a>
@@ -534,7 +749,10 @@ details p{padding:0 2.6rem 1.5rem 0;color:var(--ink-soft);font-size:.98rem}
           </button>
         </div>
       </div>
-      <button class="sound-pill muted" id="soundBtn" type="button">🔊 Tap for sound</button>
+      <div class="video-meta">
+        <span class="video-meta-label">Suz Hutchings · Integrity Buyers Agent Perth</span>
+        <button class="sound-btn" id="soundBtn" type="button">Tap for sound</button>
+      </div>
     </div>
 
     <div class="hero-cta">
@@ -543,102 +761,254 @@ details p{padding:0 2.6rem 1.5rem 0;color:var(--ink-soft);font-size:.98rem}
     </div>
     <p class="hero-note">No obligation · No pressure · 15 minutes</p>
 
-    <div class="trust">
-      <div class="trust-item"><b>Buyers only</b>Never the seller</div>
-      <div class="trust-item"><b>On &amp; off-market</b>Homes you won't see listed</div>
-      <div class="trust-item"><b>Perth metro</b>Coast to hills</div>
-      <div class="trust-item"><b>First call free</b>15 minutes, straight answers</div>
-    </div>
-  </div>
-</section>
-
-<section class="section surface-blend">
-  <div class="wrap">
-    <div class="head-block rise">
-      <span class="kicker">Sound familiar?</span>
-      <h2>Fourth home open this month. Same result.</h2>
-      <p class="lede">You inspect on Saturday. You offer on Sunday. By Tuesday the listing reads <em>Under Offer</em> — and nobody tells you by how much you missed. Nothing about the way you're buying is wrong. You're just walking in with less information than the person across the table.</p>
-    </div>
-
-    <div class="ledger" id="ledger">
-      <article class="lot"><div><span class="lot-meta">Offer 01 · Submitted</span><h3 class="lot-addr">Bayswater</h3><p class="lot-spec">3 × 1 character · asking price</p></div><span class="stamp">Under offer</span></article>
-      <article class="lot"><div><span class="lot-meta">Offer 02 · Submitted</span><h3 class="lot-addr">Mount Hawthorn</h3><p class="lot-spec">3 × 2 · $25k over asking</p></div><span class="stamp">Under offer</span></article>
-      <article class="lot"><div><span class="lot-meta">Offer 03 · Submitted</span><h3 class="lot-addr">Karrinyup</h3><p class="lot-spec">4 × 2 · finance approved</p></div><span class="stamp">Under offer</span></article>
-      <article class="lot"><div><span class="lot-meta">Offer 04 · Submitted</span><h3 class="lot-addr">Bicton</h3><p class="lot-spec">3 × 2 · cash buyer beat you</p></div><span class="stamp">Under offer</span></article>
-      <article class="lot"><div><span class="lot-meta">Offer 05 · Submitted</span><h3 class="lot-addr">Willagee</h3><p class="lot-spec">4 × 2 · 19 offers on the table</p></div><span class="stamp">Under offer</span></article>
-      <article class="lot win">
-        <span class="lot-tag">With a buyer's agent</span>
-        <div><span class="lot-meta">Offer 06 · Accepted</span><h3 class="lot-addr">Your next home</h3><p class="lot-spec">Off-market · seller's terms met</p></div>
-        <span class="stamp">Secured</span>
-      </article>
-    </div>
-    <p class="ledger-foot">Illustrative only — but you already knew that pattern.</p>
-  </div>
-</section>
-
-<section class="section surface-ice">
-  <div class="wrap">
-    <div class="head-block rise">
-      <span class="kicker">How it works</span>
-      <h2>Someone on your side of the table.</h2>
-      <p class="lede">Every other person in the transaction is paid by the seller. This is the part that changes.</p>
-    </div>
-
-    <div class="steps">
-      <div class="step rise">
-        <span class="step-n">Step 01</span>
-        <h3>The 15-minute call</h3>
-        <p>Tell me your suburbs, your budget and your deadline. I'll tell you straight whether a buyer's agent is worth it for you — including when the answer is no. There's no pitch at the end of it.</p>
+    <div class="proof">
+      <div class="proof-item">
+        <span class="proof-n">25<small>+</small></span>
+        <span class="proof-label">Buyers successfully represented</span>
       </div>
-      <div class="step rise">
-        <span class="step-n">Step 02</span>
-        <h3>The search</h3>
-        <p>On-market shortlisting, plus the off-market conversations that never make it to realestate.com.au. You inspect fewer homes, and the ones you do see are worth the Saturday.</p>
+      <div class="proof-item">
+        <span class="proof-n">100<small>+</small></span>
+        <span class="proof-label">Perth agents networked with</span>
       </div>
-      <div class="step rise">
-        <span class="step-n">Step 03</span>
-        <h3>The offer</h3>
-        <p>I find out what the seller actually wants — settlement date, conditions, certainty — and build the offer around it. Price is only one of the terms you can win on.</p>
+      <div class="proof-item">
+        <span class="proof-n">2025</span>
+        <span class="proof-label">Buyer&apos;s Agent of the Year, Customer Service</span>
+      </div>
+      <div class="proof-item">
+        <span class="proof-n">15<small> min</small></span>
+        <span class="proof-label">First call, free and no obligation</span>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section surface-navy grain grid-overlay">
-  <div class="wrap about">
-    <div class="portrait rise">
-      <img
-        src="images/suz-landing.jpeg"
-        alt="Suz Hutchings, buyer's advocate, Integrity Buyers Agent Perth, Western Australia"
-        width="1256"
-        height="2048"
-        loading="lazy"
-      >
+<section aria-labelledby="pattern-h" class="section surface-blend" id="pattern">
+  <div class="wrap">
+    <div class="section-head rise">
+      <span class="section-index">01</span>
+      <div class="section-head-body">
+        <span class="kicker">Sound familiar?</span>
+        <h2 id="pattern-h">The week that keeps repeating.</h2>
+        <p class="lede">Nothing about the way you&apos;re buying is wrong. You&apos;re just walking in with less information than the person across the table — and nobody tells you by how much you missed.</p>
+      </div>
     </div>
-    <div class="rise">
-      <span class="kicker">Meet your buyer's agent</span>
-      <h2>I'm Suz. I only ever work for the buyer.</h2>
-      <p class="lede">I specialise in finding on-market and off-market homes for Perth families and singles — the people who've been to twenty home opens and are starting to wonder whether they're the problem. You're not. The market moved, and the rules for winning in it moved with it.</p>
-      <p>Book the call and you'll get an honest read on where you actually stand: what your budget really buys right now, which suburbs are worth your Saturdays, and what's been costing you the last five offers.</p>
-      <ul class="creds">
-        <li>Perth metro specialist — coast, river and hills corridors</li>
-        <li>On-market and off-market property search</li>
-        <li>Negotiation and offer strategy on your behalf</li>
-        <li>Works with first-home buyers, upsizers and relocations</li>
-      </ul>
+
+    <div class="section-body">
+      <div class="timeline" id="timeline">
+        <div class="tl-row">
+          <span class="tl-day">Saturday</span>
+          <span class="tl-what">You inspect
+            <span class="tl-note">Fourth home open this month. Twenty other people through the door in half an hour.</span>
+          </span>
+        </div>
+        <div class="tl-row">
+          <span class="tl-day">Sunday</span>
+          <span class="tl-what">You offer
+            <span class="tl-note">Your best number, your cleanest terms, and a note about how much the home means to you.</span>
+          </span>
+        </div>
+        <div class="tl-row">
+          <span class="tl-day">Monday</span>
+          <span class="tl-what">You wait
+            <span class="tl-note">The agent is &ldquo;presenting all offers to the seller.&rdquo; No indication of where yours sits.</span>
+          </span>
+        </div>
+        <div class="tl-row">
+          <span class="tl-day">Tuesday</span>
+          <span class="tl-what">The listing changes
+            <span class="tl-note">No feedback on price, no reason given, and no idea what the winning offer actually looked like.</span>
+          </span>
+          <span class="tl-stamp">Under offer</span>
+        </div>
+        <div class="tl-row tl-row--break">
+          <span class="tl-day">The change</span>
+          <span class="tl-what">Someone asks the right questions first
+            <span class="tl-note">Before the offer goes in — what the seller actually needs, and what the competition looks like.</span>
+          </span>
+          <span class="tl-stamp">Your next home</span>
+        </div>
+      </div>
+      <p class="timeline-foot">A composite of what Perth buyers describe on the first call. Not a specific property or client.</p>
     </div>
   </div>
 </section>
 
-<section class="section surface-blend" id="book">
+<section aria-labelledby="questions-h" class="section surface-navy grain grid-overlay bg-dark" id="questions">
   <div class="wrap">
-    <div class="book-head rise">
-      <span class="kicker">Free consultation</span>
-      <h2>Book your free 15-minute call with Suz</h2>
-      <p class="lede">Pick a time that suits. You'll get a confirmation by email and a text reminder before we speak.</p>
+    <div class="section-head rise">
+      <span class="section-index">02</span>
+      <div class="section-head-body">
+        <span class="kicker">What the video covers</span>
+        <h2 id="questions-h">The three questions, in order.</h2>
+        <p class="lede">Ask these at your next home open and you stop guessing at the number. Each one is unpacked properly in the video above — with the exact wording to use.</p>
+      </div>
     </div>
 
-    <div class="book-panel rise">
+    <div class="section-body">
+      <!-- =========================================================
+           SUZ TO CONFIRM — replace each .q-slot with the real
+           question from the video. Keep the numbering and layout.
+           ========================================================= -->
+      <div class="questions">
+        <div class="q rise">
+          <span class="q-n">01</span>
+          <span class="q-label">Ask before you inspect</span>
+          <div class="q-slot">
+            <span class="q-slot-tag">Question one</span>
+            <p>Suz to supply the exact wording of the first question as delivered in the video.</p>
+          </div>
+        </div>
+        <div class="q rise">
+          <span class="q-n">02</span>
+          <span class="q-label">Ask before you offer</span>
+          <div class="q-slot">
+            <span class="q-slot-tag">Question two</span>
+            <p>Suz to supply the exact wording of the second question as delivered in the video.</p>
+          </div>
+        </div>
+        <div class="q rise">
+          <span class="q-n">03</span>
+          <span class="q-label">Ask before you sign</span>
+          <div class="q-slot">
+            <span class="q-slot-tag">Question three</span>
+            <p>Suz to supply the exact wording of the third question as delivered in the video.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="questions-foot rise">
+        <p>Prefer to have someone ask them for you, every time, with the agent relationships already in place?</p>
+        <a class="btn btn-primary" href="#book">Book the free 15-minute call <span class="arw">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="process-h" class="section surface-ice" id="process">
+  <div class="wrap">
+    <div class="section-head rise">
+      <span class="section-index">03</span>
+      <div class="section-head-body">
+        <span class="kicker">How it works</span>
+        <h2 id="process-h">Someone on your side of the table.</h2>
+        <p class="lede">Every other person in the transaction is paid by the seller. This is the part that changes.</p>
+      </div>
+    </div>
+
+    <div class="section-body">
+      <div class="steps">
+        <div class="step rise">
+          <span class="step-n">01 <em>The call</em></span>
+          <h3>Fifteen minutes, straight answers</h3>
+          <p>Tell me your suburbs, your budget and your deadline. I&apos;ll tell you straight whether a buyer&apos;s agent is worth it for you — including when the answer is no. There&apos;s no pitch at the end of it.</p>
+        </div>
+        <div class="step rise">
+          <span class="step-n">02 <em>The search</em></span>
+          <h3>On-market and off-market</h3>
+          <p>On-market shortlisting, plus the agent conversations that happen before a listing goes live. You inspect fewer homes, and the ones you do see are worth the Saturday.</p>
+        </div>
+        <div class="step rise">
+          <span class="step-n">03 <em>The offer</em></span>
+          <h3>Built around what the seller needs</h3>
+          <p>I find out what the seller actually wants — settlement date, conditions, certainty — and build the offer around it. Price is only one of the terms you can win on.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="suz-h" class="section surface-navy grain grid-overlay bg-dark" id="suz">
+  <div class="wrap">
+    <div class="section-head rise">
+      <span class="section-index">04</span>
+      <div class="section-head-body">
+        <span class="kicker">Meet your buyer&apos;s agent</span>
+        <h2 id="suz-h">I&apos;m Suz. I only ever work for the buyer.</h2>
+      </div>
+    </div>
+
+    <div class="section-body about">
+      <div class="rise">
+        <div class="portrait">
+          <img
+            alt="Suz Hutchings, buyer's advocate, Integrity Buyers Agent Perth, Western Australia"
+            height="2048"
+            loading="lazy"
+            src="images/suz-landing.jpeg"
+            width="1256"
+          >
+        </div>
+        <p class="portrait-caption">Susan &ldquo;Suz&rdquo; Hutchings · Principal<br>Safety Bay WA · Serving Perth metro</p>
+      </div>
+      <div class="rise">
+        <p class="lede">A few years ago I was a newly single mum trying to buy a home on my own. My pre-approval expired three times, I missed out on homes I loved, and one purchase fell over when finance was declined at the final hurdle. I got there in the end — and then turned everything I&apos;d learned the hard way into a career.</p>
+        <p>Today I represent buyers only, never sellers. Book the call and you&apos;ll get an honest read on where you actually stand: what your budget really buys right now, which suburbs are worth your Saturdays, and what&apos;s been costing you the last few offers.</p>
+        <ul class="creds">
+          <li>Buyer&apos;s Agent of the Year — Customer Service 2025</li>
+          <li>REIWA member · Real Estate Licence RA84804</li>
+          <li>Perth metro — coastal, river and hills corridors</li>
+          <li>Research, inspections, negotiation and settlement support</li>
+        </ul>
+        <ul class="chips">
+          <li>First-home buyers</li>
+          <li>Families upsizing or downsizing</li>
+          <li>Singles buying solo</li>
+          <li>Buying again after divorce or life change</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="reviews-h" class="section surface-blend" id="reviews">
+  <div class="wrap">
+    <div class="section-head rise">
+      <span class="section-index">05</span>
+      <div class="section-head-body">
+        <span class="kicker">In their words</span>
+        <h2 id="reviews-h">Buyers who stopped missing out.</h2>
+        <p class="lede">Verbatim reviews from Perth buyers Suz has represented.</p>
+      </div>
+    </div>
+
+    <div class="section-body">
+      <div class="quotes">
+        <article class="quote rise">
+          <span aria-hidden="true" class="quote-mark">&ldquo;</span>
+          <blockquote>Our offer was only in front of 7 others by an inch.</blockquote>
+          <p>We were first home buyers navigating the competitive Perth market for the first time. Suz may have been the reason it got over the line, as we made a couple of last-minute adjustments to the figure and conditions.</p>
+          <cite>Miranda Ling</cite>
+        </article>
+        <article class="quote rise">
+          <span aria-hidden="true" class="quote-mark">&ldquo;</span>
+          <blockquote>Her relationship with agents meant we had access to pre-market homes.</blockquote>
+          <p>I&apos;m more than certain without her I would not have secured my home. Suz was the first one the seller&apos;s agent contacted when a higher offer fell through, which allowed me the opportunity to buy despite other buyers having higher offers than me.</p>
+          <cite>Julia Carolyn</cite>
+        </article>
+        <article class="quote rise">
+          <span aria-hidden="true" class="quote-mark">&ldquo;</span>
+          <blockquote>Susan was worth every penny and more.</blockquote>
+          <p>We were at our wits&apos; end with this insane property market. Susan took all that off our plate and got us a home with everything we wanted for a great price.</p>
+          <cite>Kim MCG</cite>
+        </article>
+      </div>
+      <p class="quotes-foot rise">More reviews on <a href="https://www.google.com/maps/place/Integrity+Buyers+Agent+Perth/@-32.3107089,115.7378272,16.24z/data=!4m8!3m7!1s0x2a3283565b120e35:0xa3d154674f57c59f!8m2!3d-32.3105751!4d115.7341579!9m1!1b1!16s%2Fg%2F11x21v550k?entry=ttu" rel="noopener noreferrer" target="_blank">Google</a>.</p>
+    </div>
+  </div>
+</section>
+
+<section aria-labelledby="book-h" class="section surface-ice" id="book">
+  <div class="wrap">
+    <div class="section-head section-head--center rise">
+      <span class="section-index">06</span>
+      <div class="section-head-body">
+        <span class="kicker">Free consultation</span>
+        <h2 id="book-h">Book your free 15-minute call with Suz</h2>
+        <p class="lede">Pick a time that suits. You&apos;ll get a confirmation by email and a reminder before we speak.</p>
+      </div>
+    </div>
+
+    <div class="section-body book-panel rise">
       <aside class="book-side">
         <span class="kicker">What we'll cover</span>
         <h3>Fifteen minutes, four answers.</h3>
@@ -677,13 +1047,16 @@ details p{padding:0 2.6rem 1.5rem 0;color:var(--ink-soft);font-size:.98rem}
   </div>
 </section>
 
-<section class="section surface-ice">
+<section aria-labelledby="faq-h" class="section surface-blend" id="faq">
   <div class="wrap">
-    <div class="head-block rise" style="margin-inline:auto;text-align:center">
-      <span class="kicker">Before you book</span>
-      <h2>The usual questions.</h2>
+    <div class="section-head section-head--center rise">
+      <span class="section-index">07</span>
+      <div class="section-head-body">
+        <span class="kicker">Before you book</span>
+        <h2 id="faq-h">The usual questions.</h2>
+      </div>
     </div>
-    <div class="faq">
+    <div class="section-body faq">
       <details>
         <summary>Do I have to be ready to buy right now?</summary>
         <p>No. Plenty of the people I speak to are three to six months away. Knowing what to fix in your finance, your search area or your offer strategy before you're in the market is usually worth more than doing it in a rush afterwards.</p>
@@ -743,10 +1116,12 @@ details p{padding:0 2.6rem 1.5rem 0;color:var(--ink-soft);font-size:.98rem}
         </ul>
       </div>
       <div>
-        <h4>Page</h4>
+        <h4>On this page</h4>
         <ul class="foot-list">
-          <li><a href="#book">Book a free call</a></li>
           <li><a href="#top">Watch the video</a></li>
+          <li><a href="#questions">The three questions</a></li>
+          <li><a href="#process">How it works</a></li>
+          <li><a href="#book">Book a free call</a></li>
           <li><a href="https://integritybuyersagentperth.com.au/">Main website</a></li>
         </ul>
       </div>
@@ -756,7 +1131,8 @@ details p{padding:0 2.6rem 1.5rem 0;color:var(--ink-soft);font-size:.98rem}
 
     <div class="foot-bar">
       <span>© 2026 Integrity Buyers Agent Perth</span>
-      <span>Licence RA84804 · REIWA member</span>
+      <span>Buyer&apos;s Agent of the Year, Customer Service 2025</span>
+      <span>REIWA member · Licence RA84804</span>
     </div>
   </div>
 </footer>
@@ -787,20 +1163,21 @@ details p{padding:0 2.6rem 1.5rem 0;color:var(--ink-soft);font-size:.98rem}
     },{threshold:.18, rootMargin:'0px 0px -8% 0px'});
     document.querySelectorAll('.rise').forEach(function(el){ io.observe(el); });
 
-    var ledger = document.getElementById('ledger');
-    if(ledger){
-      var lots = ledger.querySelectorAll('.lot');
-      var lio = new IntersectionObserver(function(entries){
+    /* timeline rows land one after another */
+    var timeline = document.getElementById('timeline');
+    if(timeline){
+      var rows = timeline.querySelectorAll('.tl-row');
+      var tio = new IntersectionObserver(function(entries){
         entries.forEach(function(e){
           if(!e.isIntersecting) return;
-          lots.forEach(function(lot,i){ setTimeout(function(){ lot.classList.add('in'); }, i*170); });
-          lio.disconnect();
+          rows.forEach(function(row,i){ setTimeout(function(){ row.classList.add('in'); }, i*140); });
+          tio.disconnect();
         });
-      },{threshold:.25});
-      lio.observe(ledger);
+      },{threshold:.2});
+      tio.observe(timeline);
     }
   } else {
-    document.querySelectorAll('.rise, .lot').forEach(function(el){ el.classList.add('in'); });
+    document.querySelectorAll('.rise, .tl-row').forEach(function(el){ el.classList.add('in'); });
   }
 
   /* video — from existing GHL landing page VSL */
@@ -809,21 +1186,25 @@ details p{padding:0 2.6rem 1.5rem 0;color:var(--ink-soft);font-size:.98rem}
   var soundBtn = document.getElementById('soundBtn');
   var playBtn = document.getElementById('playBtn');
 
+  function syncSoundBtn(){
+    soundBtn.classList.toggle('on', !video.muted);
+    soundBtn.textContent = video.muted ? 'Tap for sound' : 'Sound on';
+  }
+
   function startVideo(unmute){
     video.muted = !unmute;
     overlay.classList.add('hidden');
-    soundBtn.classList.toggle('muted', !unmute);
-    soundBtn.textContent = unmute ? '🔊 Sound on' : '🔊 Tap for sound';
+    overlay.setAttribute('aria-hidden', 'true');
+    syncSoundBtn();
     video.play().catch(function(){});
   }
 
-  playBtn.addEventListener('click', function(){ startVideo(false); });
-  overlay.addEventListener('click', function(){ startVideo(false); });
+  playBtn.addEventListener('click', function(){ startVideo(true); });
+  overlay.addEventListener('click', function(){ startVideo(true); });
   soundBtn.addEventListener('click', function(){
     if(video.paused){ startVideo(true); return; }
     video.muted = !video.muted;
-    soundBtn.classList.toggle('muted', video.muted);
-    soundBtn.textContent = video.muted ? '🔊 Tap for sound' : '🔊 Sound on';
+    syncSoundBtn();
   });
 
   /* Vexur calendar mount */
