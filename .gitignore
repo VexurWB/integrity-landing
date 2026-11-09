@@ -4,5 +4,7 @@
 node_modules
 
 # local env + editor state
+.env
+.env.local
 .env.*.local
-config.bat
+.vscode/
